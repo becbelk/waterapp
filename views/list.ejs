@@ -1,0 +1,72 @@
+<div class="row mx-3">
+    <% let bgroundcolor=["bg-grey2","bg-grey1"] %>
+        <form action="/list" method="POST">
+            <div class="row mx-4">
+                <a href="#" class="col-1"></a>
+                <input name="searchTerm" id="searchTerm" class="col-2" placeholder="البحث بالاسم او العنوان" value="">
+                <input class="col-1 btn btn-outline-success shadow-sm fw-bold" id="sender" type="submit" value="بحث"
+                    onclick="saveSearchZone()">
+
+
+                <a href="#" class="col-2">نتيجة البحث<%= count %> مستهلك</a>
+                <a href="#" class="col-1"></a>
+
+                <a href="#" id="deleteSearchCookie" class="col-1" onclick="setCookie('searchTerm','')">إلغاء البحث</a>
+                <div class="col-4">
+                    <a href="/list/?page=1" class="col-2 btn btn-outline-success shadow-sm">اﻷولى</a>
+
+                    <% if (previousPage !==null) { %>
+                        <a href="/list/?page=<%= previousPage %>" class="col-3 btn btn-outline-success shadow-sm">
+                            &#8249;
+                            ص :<%= previousPage %>
+                        </a>
+                        <% }else{ %>
+                            <a href="#" class="col-3 btn btn-outline-success shadow-sm"> &#8249;** </a>
+                            <% } %>
+                                <% if (nextPage !==null) { %>
+                                    <a href="/list/?page=<%= nextPage%>"
+                                        class="col-3 btn btn-outline-primary shadow-sm">ص :<%= nextPage%> &#8250; </a>
+                                    <% }else{ %>
+                                        <a href="#" class="col-3 btn btn-outline-primary shadow-sm">** &#8250; </a>
+                                        <% } %>
+                                            <a href="/list/?page=<%= pages%>"
+                                                class="col-2 btn btn-outline-success shadow-sm">اﻷخيرة</a>
+                                            <a href="#" class="col-3 px-2">
+                                                <%= pages %> صفحات
+                                            </a>
+                </div>
+            </div>
+        </form>
+
+        <% consumers.forEach((consumer, index)=> { %>
+            <div class="row mx-5 p-1 <%= bgroundcolor[index%2]  %>">
+                <div class=" px-2 py-2 col-10 h4  text-secondary">
+                    <%= consumer.no %>
+                        <label class="col-3 fw-bold">
+                            <%= consumer.name %>
+                        </label>
+                        <label class="col-2 text-primary">
+                            <%= consumer.address %>
+                        </label>
+                        العداد:
+                        <label class="col-1 text-danger">
+                            <%= consumer.watermeterId %>
+                        </label>
+                        القديم
+                        <label class="col-1 text-primary">
+                            <%= consumer.oldConsumption %>
+                        </label>
+                        الجديد
+                        <label class="col-1 text-success">
+                            <%= consumer.newConsumption %>
+                        </label>
+
+                        <label class="col-1 text-success">
+                            <%= consumer.isFlatRated? 'جزافي' :' ' %></label>
+            </div>
+            <a href="/consumer/<%= consumer._id  %>"
+                class="h3 py-2 fw-bold col-1 btn btn-outline-light rounded border text-success shadow-sm grow">تفاصيل</a>
+        </div>
+        <% }) %>
+
+</div>

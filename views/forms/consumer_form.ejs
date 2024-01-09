@@ -1,0 +1,29 @@
+<form action="/edit/<%= consumer._id %>" method="POST">
+    <div class="row p-2 m-2">
+        <label for="newConsumption">اسم المستهلك</label>
+
+        <input type="text" class="col-2 bg-light border rounded fw-bold text-primary" name="name"
+            placeholder="اسم المستهلك" value="<%= consumer.name %>">
+        <label for="newConsumption">العنوان</label>
+        <input type="text" class="col-2 bg-light border rounded fw-bold text-primary" name="address"
+            placeholder="العنوان" value="<%= consumer.address %>">
+        <label for="newConsumption">رقم العداد</label>
+        <input type="text" class="col-2  p-1 bg-light border rounded fw-bold text-primary" name="watermeterId"
+            placeholder="رقم العداد" value="<%= consumer.watermeterId %>">
+    </div>
+    <div class="row p-3 m-3">
+        <label class="col-1 p-1 bg-light border rounded fw-bold text-primary" for="newConsumption">القديم</label>
+        <input name="oldConsumption" class="col-2  p-1 bg-light border rounded fw-bold text-primary" value="<%= consumption.oldConsumption%>">
+<a href="#" class="col-1 bg-light  rounded fw-bold text-primary"></a>
+
+<label class="col-1   p-1 bg-light border rounded fw-bold text-primary" for="newConsumption">الجديد</label>
+<input name="newConsumption"  class="col-2  p-1 bg-light border rounded fw-bold text-primary" value="<%= consumption.newConsumption%>">
+<a href="#" class="col-1  p-1 bg-light  rounded fw-bold text-primary"></a>
+
+        <input type="submit" class="col-1  p-1 btn btn-outline-success shadow-sm" value="تأكيد">
+    </div>
+
+</form>
+<div>
+    <h1 class="centered">تغيير بيانات المستهلك <%= consumer.name %></h1>
+</div>

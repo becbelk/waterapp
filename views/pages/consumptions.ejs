@@ -1,0 +1,29 @@
+<div class="div row p-5 mx-3">
+  <% consumptions.forEach(consumption=>{ %>
+    <div class="col-1 h5 bg-secondary text-light border rounded">
+      الفترة :
+    </div>
+    <div class="col-1 h5 bg-secondary text-light border rounded">
+      <%= consumption.periode %>
+    </div>
+    <div class="col-1 h5 bg-secondary text-light border rounded">
+      القديم:
+    </div>
+    <div class="col-2 h5 bg-primary text-light border rounded">
+      <%= Number(consumption.oldConsumption).toFixed(2) %>
+    </div>
+    <div class="col-1 h5 bg-secondary text-light border rounded">
+      الجديد:
+    </div>
+    <div class="col-2 h5 bg-success text-light border rounded">
+      <%= Number(consumption.newConsumption).toFixed(2) %>
+    </div>
+
+    <div class="col-1 h5 bg-secondary  text-light border rounded">
+      الفرق:
+    </div>
+      <div class="col-3 h5 bg-danger  text-light fw-bold border rounded">
+      <%= consumption.newConsumption-consumption.oldConsumption %>  <small>متر مكعب</small> 
+    </div> 
+          <% }); %>
+</div>

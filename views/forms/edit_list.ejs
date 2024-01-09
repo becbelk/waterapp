@@ -1,0 +1,40 @@
+<h1 class="h2 px-1  text-primary">تحرير قوائم المستهلكين</h1>
+<%- include('./header_form.ejs') %>
+
+
+   <% consumers.forEach(consumer=> { %>
+      <div class="row m-1 p-1">
+         <div class="col-6">
+
+            <label for="no" class="col-1 px-2 text-secondary fw-bold">
+               <%= consumer.no %>
+            </label>
+            <input type="text" class="col-3 px-1 bg-secondary border rounded fw-bold text-light" name="name"
+               value="<%= consumer.name%>">
+            <label for="address" class="col-1 px-1 text-secondary fw-bold">العنوان</label>
+            <input type="text" class="col-3 px-1 bg-secondary border rounded fw-bold text-light" name="address"
+               value="<%= consumer.address%>">
+            <label for="watermeterId" class="col-1 px-2 text-secondary fw-bold">العداد</label>
+            <input type="text" class="col-2 px-2 bg-secondary border rounded fw-bold text-light" name="watermeterId"
+               value="<%= consumer.watermeterId%>">
+         </div>
+         <div class="col-5 text-secondary fw-bold">
+
+            <label for="old" class="col-2 text-secondary fw-bold"> القديم</label>
+            <input class="col-2 bg-light border rounded fw-bold text-primary" type="text" name="old"
+               value=<%=consumer.oldConsumption%>>
+            <label for="old" class="col-2  text-secondary fw-bold"> الجديد</label>
+            <input class="col-2  bg-light border rounded fw-bold text-danger" type="text" name="new"
+               value=<%=consumer.newConsumption%>>
+
+            <label for="isFlatRated" class="col-1  text-secondary fw-bold">جزافي</label>
+            <input class="col-1 bg-light border rounded fw-bold text-danger" type="checkbox" id="isFlatRated"
+               name="isFlatRated" <% if (consumer.isFlatRated==true) { %>
+            checked
+            <% } %>
+               >
+         </div>
+         <input type="submit" class="col-1  btn btn-outline-success fw-bold " onclick="saveElement(this)"
+            value="&#128190">
+      </div>
+      <% })//for %>

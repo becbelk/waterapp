@@ -1,0 +1,139 @@
+/*
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Marhey:wght@400;500&family=Noto+Kufi+Arabic:wght@100;200&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@500&family=Marhey:wght@400;500&family=Noto+Kufi+Arabic:wght@100;200&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+*/
+body {
+    /*    background-image: url("/img/bg-3.jpg");/**/
+    background-size: cover;
+    font-family: Noto Kufi Arabic;
+    color: rgb(28, 29, 62);
+}
+.layered-icon{position:relative}
+.layer1-icon{
+    position:absolute;
+    top:0;
+}
+.layer2-icon{
+    position:absolute;
+    top:30;
+    left:30;
+}
+.layer3-icon{
+    position:absolute;
+    top:80;
+}
+li {
+    display: inline-flex;
+}
+
+.heighlighted {
+    color: rgb(70, 66, 60);
+    font-size: 18px;
+}
+
+.infos-container {
+    color: rgb(59, 80, 80);
+    font-size: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.note {
+    color: rgb(117, 73, 7);
+    background-color: rgb(221, 224, 161);
+    font-size: 14px;
+    font-family: Noto Kufi Arabic, Helvetica, sans-serif;
+    border-style: double;
+}
+
+.toPay {
+    color: rgb(27, 9, 144);
+    background-color: rgb(121, 174, 156);
+    font-size: 14px;
+    font-family: Noto Kufi Arabic, Helvetica, sans-serif;
+    border-style: double;
+}
+
+.name-box {
+    color: rgb(14, 87, 26);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-style: double;
+
+}
+
+.centered {
+    text-align: center;
+}
+
+.watermeter {
+    padding: 20px;
+    border-style: groove;
+}
+
+.edit-zone {
+    font-family: IBM Plex Sans Arabic;
+}
+
+.horizontal {
+    display: inline-block;
+}
+
+.menu-bar {
+    background-size: cover;
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+}
+.small-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.nextprev {
+    font-size: 25px;
+}
+
+.watermeterEditZone {
+    width: 100px;
+}
+
+.infoEditZone {
+    width: 190px;
+}
+
+.no {
+    font-size: 10px;
+}
+
+.grow {
+    display: block;
+    text-decoration: none;
+    transition:all  250ms ease;
+}
+
+.grow:hover{
+    transform: scale(1.1);
+}
+
+.title__img {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, .16);
+    overflow: hidden;
+    border-radius: 8px;
+}
+.icon-button{
+    height:40px;
+    width:50px;
+}
+.bg-grey1{
+    background-color: rgb(195, 195, 195);
+}
+.bg-grey2{
+    background-color: rgb(233, 233, 233);
+}
