@@ -17,7 +17,7 @@ exports.editList = async (req, res) => {
             consumers, count, pages,
             hasNextPage, nextPage,
             hasPreviousPage, previousPage
-        } = await search.find(searchTerm, page, false)
+        } = await search.find(searchTerm, page, false,'no+1')
 
         datas.title = title;
         res.cookie('page', page)

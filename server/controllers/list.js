@@ -8,7 +8,7 @@ exports.list = async (req, res) => {
         let searchTerm = (req.body.searchTerm != null) ?
             req.body.searchTerm : decodeURIComponent(req.cookies.searchTerm);
       const datas= { consumers,count, pages,  hasNextPage, nextPage,   hasPreviousPage, previousPage } 
-      = await search.find(searchTerm, page,true);
+      = await search.find(searchTerm, page,true,'no+1');
              datas.title=title;
         res.render('list', 
             datas

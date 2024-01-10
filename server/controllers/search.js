@@ -7,7 +7,13 @@ const ctx = require('../router/context.js');
 //10 مستهلكين وفق الترتيب التسلسلي
 //
 
-exports.find = async (searchTerm, page, saveCriteria) => {
+exports.find = async (searchTerm, page, saveCriteria,sort) => {
+    let sorts={
+        'no+1':{$sort:{no:1}},
+        'no-1':{$sort:{no:-1}},
+        'time':{$sort:{editAt:-1}}
+    }
+    console.log('sorts[sort]=',sorts[sort])
     //request which is search term should be filtered and without error
     const perPage = 10;
     let query = (searchTerm) ?
@@ -17,25 +23,53 @@ exports.find = async (searchTerm, page, saveCriteria) => {
         }//todo : to be canceled or updated many pbms
         : { saved: saveCriteria }
     console.log('query=', query);
-    const count = await Consumer.countDocuments(query);
+    const count = await Consumer.countDocuments({ saved: saveCriteria });
     console.log('count=', count)
     let consumers = await Consumer.aggregate([
         { $unwind: "$consumptions" },
+        { $unwind: "$redactions" },
         { $match: { saved: saveCriteria, "consumptions.periode": ctx.context.periode } },
-        { $sort: { no: 1 } },
-        { $skip: page * perPage - perPage },
-        { $limit: perPage },
         {
             $project: {
+                id:"$_id",
                 no: 1,
                 name: 1,
                 address: 1,
                 watermeterId: 1,
                 oldConsumption: "$consumptions.oldConsumption",
-                newConsumption:"$consumptions.newConsumption",
-                isFlatRated:"$consumptions.isFlatRated"
+                newConsumption: "$consumptions.newConsumption",
+                isFlatRated: "$consumptions.isFlatRated",
+                editedAt: "$redactions.time"//******** 
             }
-        }
+        },
+        {
+            $group: {
+                _id: {
+                    _id: "$_id", no: "$no", name: "$name",
+                    address: "$address", watermeterId: "$watermeterId",
+                    oldConsumption: "$oldConsumption", newConsumption: "$newConsumption",
+                    isFlatRated: "$isFlatRated"
+                },
+                editedAt: { "$max": "$editedAt" }
+            }
+        },
+        {
+            $project: {  
+                _id:"$_id.id",
+                no: "$_id.no",
+                name: "$_id.name",
+                address:"$_id.ddress",
+                watermeterId: "$_id.watermeterId",
+                oldConsumption: "$_id.oldConsumption",
+                newConsumption: "$_id.newConsumption",
+                isFlatRated: "$_id.isFlatRated",
+                editedAt: "$_id.editedAt"//******** 
+
+            }
+        },
+       sorts[sort],
+        { $skip: page * perPage - perPage },//todo negative number
+        { $limit: perPage },
 
     ])
     //console.log('consumer=', consumers)

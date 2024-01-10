@@ -40,9 +40,9 @@
 
         <% consumers.forEach((consumer, index)=> { %>
             <div class="row mx-5 p-1 <%= bgroundcolor[index%2]  %>">
-                <div class=" px-2 py-2 col-10 h4  text-secondary">
+                <div class=" px-2 py-2 col-9 h4  text-secondary">
                     <%= consumer.no %>
-                        <label class="col-3 fw-bold">
+                        <label class="col-2 h5 text-dark fw-bold">
                             <%= consumer.name %>
                         </label>
                         <label class="col-2 text-primary">
@@ -63,10 +63,12 @@
 
                         <label class="col-1 text-success">
                             <%= consumer.isFlatRated? 'جزافي' :' ' %></label>
-            </div>
-            <a href="/consumer/<%= consumer._id  %>"
+                         <label class="col-1  h6 text-success">
+                               آخر تعديل:<%= //consumer.editedAt.toDate() %></label>
+                </div>
+                <a href="/consumer/<%= consumer._id  %>"
                 class="h3 py-2 fw-bold col-1 btn btn-outline-light rounded border text-success shadow-sm grow">تفاصيل</a>
-        </div>
+            </div>
         <% }) %>
 
 </div>
