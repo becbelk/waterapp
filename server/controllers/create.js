@@ -15,7 +15,7 @@ console.log('context=',context);
 }
 /** GET */
 exports.newConsumerForm = async (req, res) => {
-    res.render('forms/new_consumer', { title: "new" });
+    res.render('create/new_consumer', { title: "new" });
 }
 const uiAdapter = (body,context) => {
 const temp= {

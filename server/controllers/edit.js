@@ -26,7 +26,7 @@ exports.editList = async (req, res) => {
         res.cookie('hasNextPage', hasNextPage)
         res.cookie('hasPreviousPage', hasPreviousPage)
 
-        res.render('forms/edit_list',
+        res.render('update/edit_list',
             datas);
     } catch (e) {
         console.log(e);
@@ -49,7 +49,7 @@ exports.editFormForConsumer = async (req, res) => {
     let index=calc.findIndex(data.consumptions,ctx.context.periode)
     console.log('index=',index,'')
     let consumption=data.consumptions[index]
-    res.render('forms/consumer_form', { consumer,consumption, id, title });
+    res.render('update/consumer_form', { consumer,consumption, id, title });
 }
 
 
@@ -70,9 +70,9 @@ exports.searchByNo = async (req, res) => {
         datas.title= title;
 
         console.log('consumers=', datas.consumers)
-        if (datas.consumers != undefined) { res.render('forms/edit_list', datas); }
+        if (datas.consumers != undefined) { res.render('update/edit_list', datas); }
         else {
-            res.render('not_found');
+            res.render('errors/not_found');
         }
     } catch (e) {
         console.log(e);

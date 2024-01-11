@@ -1,5 +1,5 @@
 const Consumer = require('../model/consumer.js');
-const pdf = require('./pdf/pdf_controller.js');
+const pdf = require('./print/pdf_controller.js');
 const fs = require('fs')
 const path = require('path')
 const context = require('../router/context.js')
@@ -9,7 +9,7 @@ const context = require('../router/context.js')
 exports.printePage = async (req, res) => {
     const title = 'تسيير استهلاك المياه-تعديل بيانات المستهلك';
     //todo: add query
-    res.render('print');
+    res.render('read/print/main');
 }
 
 

@@ -25,13 +25,18 @@ exports.find = async (searchTerm, page, saveCriteria,sort) => {
     console.log('query=', query);
     const count = await Consumer.countDocuments({ saved: saveCriteria });
     console.log('count=', count)
+
+
+
+
+
     let consumers = await Consumer.aggregate([
         { $unwind: "$consumptions" },
         { $unwind: "$redactions" },
         { $match: { saved: saveCriteria, "consumptions.periode": ctx.context.periode } },
         {
             $project: {
-                id:"$_id",
+               // _id:"$_id",
                 no: 1,
                 name: 1,
                 address: 1,
@@ -55,10 +60,10 @@ exports.find = async (searchTerm, page, saveCriteria,sort) => {
         },
         {
             $project: {  
-                _id:"$_id.id",
+                _id:"$_id._id",
                 no: "$_id.no",
                 name: "$_id.name",
-                address:"$_id.ddress",
+                address:"$_id.address",
                 watermeterId: "$_id.watermeterId",
                 oldConsumption: "$_id.oldConsumption",
                 newConsumption: "$_id.newConsumption",
@@ -67,11 +72,12 @@ exports.find = async (searchTerm, page, saveCriteria,sort) => {
 
             }
         },
+
        sorts[sort],
         { $skip: page * perPage - perPage },//todo negative number
         { $limit: perPage },
 
-    ])
+    ]);
     //console.log('consumer=', consumers)
     // let consumers = await Consumer.find(query)
     //     .sort({ no: 1 })
@@ -84,12 +90,62 @@ exports.find = async (searchTerm, page, saveCriteria,sort) => {
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
     const hasPreviousPage = previousPage >= 1;
 
-
+   // let hasNext= await consumers.hasNext();
+    console.log('type=', JSON.stringify(consumers))
     return { consumers, count, pages, hasNextPage, nextPage, hasPreviousPage, previousPage }
 
 }
 
+const _agg=async ()=>{
+    return Consumer.aggregate([
+        { $unwind: "$consumptions" },
+        { $unwind: "$redactions" },
+        { $match: { saved: saveCriteria, "consumptions.periode": ctx.context.periode } },
+        {
+            $project: {
+               // _id:"$_id",
+                no: 1,
+                name: 1,
+                address: 1,
+                watermeterId: 1,
+                oldConsumption: "$consumptions.oldConsumption",
+                newConsumption: "$consumptions.newConsumption",
+                isFlatRated: "$consumptions.isFlatRated",
+                editedAt: "$redactions.time"//******** 
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    _id: "$_id", no: "$no", name: "$name",
+                    address: "$address", watermeterId: "$watermeterId",
+                    oldConsumption: "$oldConsumption", newConsumption: "$newConsumption",
+                    isFlatRated: "$isFlatRated"
+                },
+                editedAt: { "$max": "$editedAt" }
+            }
+        },
+        {
+            $project: {  
+                _id:"$_id._id",
+                no: "$_id.no",
+                name: "$_id.name",
+                address:"$_id.address",
+                watermeterId: "$_id.watermeterId",
+                oldConsumption: "$_id.oldConsumption",
+                newConsumption: "$_id.newConsumption",
+                isFlatRated: "$_id.isFlatRated",
+                editedAt: "$_id.editedAt"//******** 
 
+            }
+        },
+
+       sorts[sort],
+        { $skip: page * perPage - perPage },//todo negative number
+        { $limit: perPage },
+
+    ]);
+}
 
 exports.findOne = async (id) => {
     let consumer = await Consumer.findById(id);
@@ -135,13 +191,28 @@ exports.findBetweenNo = async (interval, page, saveCriteria) => {
     const previousPage = parseInt(page) - 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
     const hasPreviousPage = previousPage >= 1;
-    let consumers = await Consumer.find(query)
-        .sort({ no: 1 })
-        .skip(page * perPage - perPage)
-        .limit(perPage)
-        .exec();
+    let consumers = await Consumer.aggregate([
+        { $unwind: "$consumptions" },
+        { $match: { saved: saveCriteria, "consumptions.periode": ctx.context.periode ,
+         no: { $gte: min,$lte: max }} },
+        {
+            $project: {
+               // _id:"$_id",
+                no: 1,
+                name: 1,
+                address: 1,
+                watermeterId: 1,
+                oldConsumption: "$consumptions.oldConsumption",
+                newConsumption: "$consumptions.newConsumption",
+                isFlatRated: "$consumptions.isFlatRated",
+                editedAt: "$redactions.time"//******** 
+            }
+        },
+       {$sort:{no:1},},
+        { $skip: page * perPage - perPage },//todo negative number
+        { $limit: perPage },
 
-    console.log('consumer=', consumers)
+    ]);
     return { consumers, count, pages, hasNextPage, nextPage, hasPreviousPage, previousPage }
 }
 

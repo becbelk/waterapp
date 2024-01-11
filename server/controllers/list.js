@@ -10,7 +10,7 @@ exports.list = async (req, res) => {
       const datas= { consumers,count, pages,  hasNextPage, nextPage,   hasPreviousPage, previousPage } 
       = await search.find(searchTerm, page,true,'no+1');
              datas.title=title;
-        res.render('list', 
+        res.render('read/list', 
             datas
         );
     } catch (e) {
