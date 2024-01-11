@@ -1,7 +1,7 @@
-const calculator = require('../../../misc/calculator.js');
-const headerBuilder = require('./headless_settings.js');
-const op = require('./rows_operations.js');
-const stringOp = require('../../../misc/string_op.js');
+const calculator = require('../../../misc/calculator');
+const headerBuilder = require('./headless_settings');
+const op = require('./rows_operations');
+const stringOp = require('../../../misc/string_op');
 
 const _x=[
     0,  25,  50,  75, 100, 125, 150, 175, 200, 225,

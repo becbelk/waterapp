@@ -1,5 +1,5 @@
-const Consumer = require('../model/consumer.js');
-const ctx = require('../router/context.js');
+const Consumer = require('../model/consumer');
+const ctx = require('../misc/context');
 
 
 //في هذه الدالة يقوم بالبحث عن المستهلكين

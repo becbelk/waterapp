@@ -1,8 +1,8 @@
-const Consumer = require('../../model/consumer.js');
-const pdf = require('./print/pdf_controller.js');
+const Consumer = require('../../model/consumer');
+const pdf = require('./print/pdf_controller');
 const fs = require('fs')
 const path = require('path')
-const context = require('../../router/context.js')
+const context = require('../../misc/context')
 
 
 

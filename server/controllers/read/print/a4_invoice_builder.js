@@ -1,6 +1,6 @@
-const op = require('./rows_operations.js');
-const stringOp = require('../../../misc/string_op.js');
-const calculator = require('../../../misc/calculator.js');
+const op = require('./rows_operations');
+const stringOp = require('../../../misc/string_op');
+const calculator = require('../../../misc/calculator');
 
 
 

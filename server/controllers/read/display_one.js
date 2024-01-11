@@ -1,4 +1,4 @@
-const search = require('../search.js');
+const search = require('../search');
 
 exports.showConsumerDetails = async (req, res) => {
     const title = 'تسيير استهلاك المياه- بيانات المستهلك';

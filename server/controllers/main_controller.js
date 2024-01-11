@@ -1,6 +1,6 @@
-const Consumer = require('../model/consumer.js');
+const Consumer = require('../model/consumer');
 const calc = require('../misc/calculator')
-const search = require('./search.js');
+const search = require('./search');
 
 const Header = 1
 

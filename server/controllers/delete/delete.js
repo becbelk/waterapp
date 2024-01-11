@@ -1,4 +1,4 @@
-const Consumer = require('../../model/consumer.js');
+const Consumer = require('../../model/consumer');
 exports.deleteOne = async (req, res) => {
     try {
         let id = req.params.id;

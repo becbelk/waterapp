@@ -23,7 +23,7 @@ exports.homepage = async (req, res) => {
         }
         console.log('[*]->[admin router]: {@/admin/signin}');
         const title = 'إدارة الحساب';
-        res.render('admin/signin', { title, layout: splashLayout });
+        res.render('read/admin/signin', { title, layout: splashLayout });
     } catch (error) {
         console.log('[*]->[admin router]: ',error)
     }
@@ -66,7 +66,7 @@ exports.registerForm = async (req, res) => {
     try {
         title = 'فتح حساب'
         console.log('[*]->[admin router]: regisister Form');
-        res.render('admin/register', { title, layout: splashLayout })
+        res.render('create/admin/register', { title, layout: splashLayout })
     } catch (e) {
         console.log(e);
     }

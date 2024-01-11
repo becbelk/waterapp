@@ -1,4 +1,4 @@
-const calc = require('./calculator.js')
+const calc = require('./calculator')
 exports.update = (toUpdate, newValue, userUpdator) => {
     console.log(`[*] {updateFromUI}`);
     console.log('[*] Updating :', JSON.stringify(toUpdate), 'with values from UI:', JSON.stringify(newValue));//console.log()

@@ -1,11 +1,11 @@
-const a3 = require('./a3_page_builder.js');
-//const a3 = require('./a3_report_builder.js');
-const invoiceBuilder = require('./a4_invoice_builder.js');
-const headerBuilder = require('./headless_settings.js');
-const options = require('./waterapp_table_options.js');
-const op = require('./rows_operations.js')
-const stringOp = require('../../../misc/string_op.js');
-const init= require('./header_footer_initializer.js')
+const a3 = require('./a3_page_builder');
+//const a3 = require('./a3_report_builder');
+const invoiceBuilder = require('./a4_invoice_builder');
+const headerBuilder = require('./headless_settings');
+const options = require('./waterapp_table_options');
+const op = require('./rows_operations')
+const stringOp = require('../../../misc/string_op');
+const init= require('./header_footer_initializer')
 const fontName = 'Amiri';
 
 const footerSum = init.zeroRow;

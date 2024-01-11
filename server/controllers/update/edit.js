@@ -1,8 +1,8 @@
-const search = require('../search.js');
-const stringOp = require('../../misc/string_op.js');
-const Consumer = require('../../model/consumer.js');
-const calc = require('../../misc/calculator.js');
-const ctx = require('../../router/context.js');
+const search = require('../search');
+const stringOp = require('../../misc/string_op');
+const Consumer = require('../../model/consumer');
+const calc = require('../../misc/calculator');
+const ctx = require('../../misc/context');
 /** Get  */
 
 exports.editList = async (req, res) => {

@@ -2,7 +2,7 @@ const pdfkitTable = require('pdfkit-table');
 const pdfkit = require('pdfkit');
 const fs = require('fs');
 const taf=require('tafgeetjs');
-const paginate=require('./pagination_controller.js');
+const paginate=require('./pagination_controller');
 
 exports.printListInPDF = async (list, context,res) => {
   const globalReport = new pdfkitTable({
