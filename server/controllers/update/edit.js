@@ -1,8 +1,8 @@
-const search = require('./search.js');
-const stringOp = require('../misc/string_op.js');
-const Consumer = require('../model/consumer.js');
-const calc = require('../misc/calculator');
-const ctx = require('../router/context');
+const search = require('../search.js');
+const stringOp = require('../../misc/string_op.js');
+const Consumer = require('../../model/consumer.js');
+const calc = require('../../misc/calculator.js');
+const ctx = require('../../router/context.js');
 /** Get  */
 
 exports.editList = async (req, res) => {
@@ -49,7 +49,7 @@ exports.editFormForConsumer = async (req, res) => {
     let index=calc.findIndex(data.consumptions,ctx.context.periode)
     console.log('index=',index,'')
     let consumption=data.consumptions[index]
-    res.render('update/consumer_form', { consumer,consumption, id, title });
+    res.render('update/one/consumer', { consumer,consumption, id, title });
 }
 
 

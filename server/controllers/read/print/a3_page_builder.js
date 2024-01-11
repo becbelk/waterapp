@@ -1,6 +1,6 @@
 const op = require('./rows_operations.js');
-const stringOp = require('../../misc/string_op.js');
-const calculator = require('../../misc/calculator.js');
+const stringOp = require('../../../misc/string_op.js');
+const calculator = require('../../../misc/calculator.js');
 const rop = require('./rows_operations.js')
 
 const _dx0 = 50;

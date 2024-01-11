@@ -4,7 +4,7 @@ const invoiceBuilder = require('./a4_invoice_builder.js');
 const headerBuilder = require('./headless_settings.js');
 const options = require('./waterapp_table_options.js');
 const op = require('./rows_operations.js')
-const stringOp = require('../../misc/string_op.js');
+const stringOp = require('../../../misc/string_op.js');
 const init= require('./header_footer_initializer.js')
 const fontName = 'Amiri';
 

@@ -5,15 +5,15 @@ const auth=require('./auth')
 //const src=require('./real.js'); real database in json 
 const mk=require('./mockdata.js');
 
-const list=require("../controllers/list.js")
+const list=require("../controllers/read/list.js")
 const home=require("../controllers/home.js")
-const print=require("../controllers/print.js")
-const edit=require("../controllers/edit.js")
-const update=require('../controllers/update')
-const create=require('../controllers/create')
-const display1=require('../controllers/display_one.js');
-const del=require('../controllers/delete.js')
-const api=require('../controllers/getall.js')
+const print=require("../controllers/read/print.js")
+const edit=require("../controllers/update/edit.js")
+const update=require('../controllers/update/update.js')
+const create=require('../controllers/create/create.js')
+const display1=require('../controllers/read/display_one.js');
+const del=require('../controllers/delete/delete.js')
+const api=require('../controllers/read/getall.js')
 
 /**
  * get home page

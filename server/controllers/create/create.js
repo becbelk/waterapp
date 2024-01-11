@@ -1,5 +1,5 @@
-const Consumer = require('../model/consumer.js');
-const context = require('../router/context.js');
+const Consumer = require('../../model/consumer.js');
+const context = require('../../router/context.js');
 
 /** POST */
 exports.saveNewConsumer = async (req, res) => {

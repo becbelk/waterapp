@@ -1,6 +1,6 @@
-const Consumer = require('../model/consumer.js');
-const uiFacade = require('../misc/ui_facade.js')
-const ctx = require('../router/context.js')
+const Consumer = require('../../model/consumer.js');
+const uiFacade = require('../../misc/ui_facade.js')
+const ctx = require('../../router/context.js')
 
 
 exports.saveRow = async (req, res) => {

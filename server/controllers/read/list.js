@@ -1,4 +1,4 @@
-const search = require('./search.js');
+const search = require('../search.js');
 //const Consumer = require('../model/consumer.js');
 exports.list = async (req, res) => {
 
