@@ -3,7 +3,7 @@ const router = express.Router();
 const mainController = require('../controllers/main_controller');
 const auth=require('./auth')
 //const src=require('./real'); real database in json 
-const mk=require('./mockdata');
+const mk=require('../misc/mockdata.js');
 
 const list=require("../controllers/read/list.js")
 const home=require("../controllers/home.js")

@@ -3,7 +3,7 @@ const auth=require('./auth');
 const router = express.Router();
 const admin = require('../controllers/admin/admin_controller');
 
-const mck=require('./mockdata');
+const mck=require('../misc/mockdata');
 
 //if the token already exist it will pass through
 router.get('/', admin.homepage,);
