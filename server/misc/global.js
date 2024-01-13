@@ -15,3 +15,16 @@ exports.context = {
     sumLabel: ['',  'المجموع للترحيل','المجموع المرحل','المجموع الكلي'],
     endOfDocument: false,
 }
+exports. levelAmountTable = [
+    { edge: 100, price: 6.3, tax: 2.35, difference: 100, index: 1 },
+    { edge: 220, price: 20.48, tax: 7.64, difference: 120, index: 2 },
+    { edge: 328, price: 34.65, tax: 12.93, difference: 108, index: 3 },
+    { edge: 100000000, price: 40.95, tax: 15.28, difference: 0, index: 4 }
+]
+
+//exports. maxLevel = 4;
+
+exports. inscriptionTax = 200;
+exports. flatRateAmount = 5000;
+
+

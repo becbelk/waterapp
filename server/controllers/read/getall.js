@@ -1,6 +1,6 @@
 
 const Consumer = require('../../model/consumer');
-const context=require('../../misc/context');
+const context=require('../../misc/global');
 
 exports.getall=async (req,res)=>{
 let list = await Consumer.find();

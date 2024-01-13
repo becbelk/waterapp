@@ -1,6 +1,6 @@
 
 const jwt = require('jsonwebtoken');
-const context = require('../misc/context');
+const context = require('../misc/global');
 const bcrypt = require('bcrypt');
 
 

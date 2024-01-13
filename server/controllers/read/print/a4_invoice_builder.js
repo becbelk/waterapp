@@ -80,7 +80,9 @@ const print = (doc, size, str, x, y) => {
 }
 const putDataInInvoice = (currentData, doc, invoiceWidth, xmin, xmax, y, context) => {
     let m = doc.options.margin;
-    let invoice = calculator.calculateDetailedInvoice(currentData,context);
+    let invoice = calculator.calculateDetailedInvoice(currentData);//!error here
+    console.log('currentData=',currentData)
+    console.log('invoice=',invoice)
     doc.save()
         .font('Amiri',);
     print(doc, 12, context.organization, _x[21], y-_y[1]/2);
@@ -95,7 +97,7 @@ const putDataInInvoice = (currentData, doc, invoiceWidth, xmin, xmax, y, context
     print(doc, 10,'العداد: ' , _x[12], y+_y[1]);
     print(doc, 10,currentData.watermeterId , _x[11], y+_y[1]);
     print(doc, 10,'القديم:',_x[10], y+_y[1]);
-    print(doc, 10,Number(invoice.oldC).toFixed(0) , _x[9], y+_y[1]);
+    print(doc, 10,Number(invoice.oldC).toFixed(0) , _x[9], y+_y[1]);//todo: error
     print(doc, 10,'الجديد:' , _x[8], y+_y[1]);
     print(doc, 10,Number(invoice.newC).toFixed(0) , _x[7], y+_y[1]);
     print(doc, 10,'الفرق:' , _x[6], y+_y[1]);

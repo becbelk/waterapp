@@ -1,5 +1,5 @@
 const Consumer = require('../model/consumer');
-const ctx = require('../misc/context');
+const ctx = require('../misc/global');
 
 
 //في هذه الدالة يقوم بالبحث عن المستهلكين
@@ -9,8 +9,8 @@ const ctx = require('../misc/context');
 
 exports.find = async (searchTerm, page, saveCriteria,sort) => {
     let sorts={
-        'no+1':{$sort:{no:1}},
-        'no-1':{$sort:{no:-1}},
+        'no+1':{$sort:{address:1,no:1}},
+        'no-1':{$sort:{address:1,no:-1}},
         'time':{$sort:{editAt:-1}}
     }
     console.log('sorts[sort]=',sorts[sort])

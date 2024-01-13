@@ -1,5 +1,5 @@
 const Consumer = require('../../model/consumer');
-const context = require('../../misc/context');
+const context = require('../../misc/global');
 
 /** POST */
 exports.saveNewConsumer = async (req, res) => {

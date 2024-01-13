@@ -2,7 +2,7 @@ const search = require('../search');
 const stringOp = require('../../misc/string_op');
 const Consumer = require('../../model/consumer');
 const calc = require('../../misc/calculator');
-const ctx = require('../../misc/context');
+const ctx = require('../../misc/global');
 /** Get  */
 
 exports.editList = async (req, res) => {

@@ -13,7 +13,7 @@ const User= Schema({
     },
     previlege:{
         type:String,
-        default:'Agent',
+        default:'Agent',// admin agent viewer
     },
     createdAt:{
         type:Date,

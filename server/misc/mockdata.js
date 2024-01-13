@@ -47,8 +47,8 @@ exports.insertDatas = async (db) => {
         //console.log('======db=',db);
         for(let index=0; index<db.length;index++) {
             let item=db[index];
-            const _isFound =await  Consumer.find({ no: item.no });
-            if (_isFound.length === 0) {
+            const element =await  Consumer.find({ no: item.no });
+            if (element.length === 0) {
                 const _old=Number(item.newConsumption??=0);
                 const _new=Number(item.newConsumption??=0)+rand1000();
                 const element= {
@@ -66,6 +66,9 @@ exports.insertDatas = async (db) => {
                     redactions: [{ user: 'بلقاسم', time: Date.now() },],
                 };
                 const _x =await  Consumer.insertMany(element);
+            }
+            else{
+                console.log('[*] Error Happening, [',item.no,'] already exist')
             }
 
         }
