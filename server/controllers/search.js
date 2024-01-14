@@ -96,56 +96,6 @@ exports.find = async (searchTerm, page, saveCriteria,sort) => {
 
 }
 
-const _agg=async ()=>{
-    return Consumer.aggregate([
-        { $unwind: "$consumptions" },
-        { $unwind: "$redactions" },
-        { $match: { saved: saveCriteria, "consumptions.periode": ctx.context.periode } },
-        {
-            $project: {
-               // _id:"$_id",
-                no: 1,
-                name: 1,
-                address: 1,
-                watermeterId: 1,
-                oldConsumption: "$consumptions.oldConsumption",
-                newConsumption: "$consumptions.newConsumption",
-                isFlatRated: "$consumptions.isFlatRated",
-                editedAt: "$redactions.time"//******** 
-            }
-        },
-        {
-            $group: {
-                _id: {
-                    _id: "$_id", no: "$no", name: "$name",
-                    address: "$address", watermeterId: "$watermeterId",
-                    oldConsumption: "$oldConsumption", newConsumption: "$newConsumption",
-                    isFlatRated: "$isFlatRated"
-                },
-                editedAt: { "$max": "$editedAt" }
-            }
-        },
-        {
-            $project: {  
-                _id:"$_id._id",
-                no: "$_id.no",
-                name: "$_id.name",
-                address:"$_id.address",
-                watermeterId: "$_id.watermeterId",
-                oldConsumption: "$_id.oldConsumption",
-                newConsumption: "$_id.newConsumption",
-                isFlatRated: "$_id.isFlatRated",
-                editedAt: "$_id.editedAt"//******** 
-
-            }
-        },
-
-       sorts[sort],
-        { $skip: page * perPage - perPage },//todo negative number
-        { $limit: perPage },
-
-    ]);
-}
 
 exports.findOne = async (id) => {
     let consumer = await Consumer.findById(id);
@@ -219,7 +169,7 @@ exports.findBetweenNo = async (interval, page, saveCriteria) => {
 
 
 
-/*
+
 exports.text=async(searchTerm,page)=>{
     const q1 = { $text: { $search: searchTerm }, };
 
@@ -236,4 +186,4 @@ exports.text=async(searchTerm,page)=>{
     let consumer=consumers.slice((page-1) * perPage ,page*perPage);
 return 
 {consumer,count,pages,hasNextPage,nextPage,hasPreviousPage,previousPage}
-}*/
+}

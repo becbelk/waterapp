@@ -17,9 +17,9 @@ const baseUrl = 'http://localhost:6734';
 // });
 const saveElement = (e) => {
     //display(e);
-    console.log('e.parentElement=',e.parentElement,)
+    console.log('e.parentElement=', e.parentElement,)
     setButoonGreen(e);
-//    removeRow(e);
+    //    removeRow(e);
 
     const _consumer = {
         "periode": "2022",//todo: the year should be gotten from ui
@@ -31,7 +31,7 @@ const saveElement = (e) => {
         "newConsumption": e.parentElement.children[1].children[3].value.trim(),
         "isFlatRated": e.parentElement.children[1].children[5].checked,
     }
-    console.log('_consumer=',_consumer,)
+    console.log('_consumer=', _consumer,)
     if (_consumer.isFlatRated) {
         _consumer.oldConsumption = 0;
         _consumer.newConsumption = 0;
@@ -51,8 +51,8 @@ const saveElement = (e) => {
 const setButoonGreen = (elt) => {
     console.log(elt.parentElement.parentElement)
     elt.setAttribute("class", "col-1  btn btn-success fw-bold");
-    elt.setAttribute("icon","fa fa-home");
-  //  e.setAttribute("value","&#9745;");
+    elt.setAttribute("icon", "fa fa-home");
+    //  e.setAttribute("value","&#9745;");
 }
 const display = (e) => {
     console.log('this =', e)
@@ -65,11 +65,11 @@ const display = (e) => {
     console.log('4=', e.parentElement.children[1].children[0].children[3].value)
     console.log('4=', e.parentElement.children[1].children[0].children[5].checked)
 }
-function removeRow(event){
-    console.log('remove=========================',event);
-    let body=event.currentTarget;
-    let row=event.target.closest(".p-1");
-    console.log('++++++ row=',row)
+function removeRow(event) {
+    console.log('remove=========================', event);
+    let body = event.currentTarget;
+    let row = event.target.closest(".p-1");
+    console.log('++++++ row=', row)
     row?.remove()
 }
 
@@ -107,6 +107,22 @@ function setCookie(cName, cValue, expDays) {
     const expires = "expires=" + date.toUTCString();
     document.cookie = cName + "=" + encodeURIComponent(cValue) + "; " + expires + "; path=/";
     if (!cValue) { document.getElementById("sender").click(); }
+}
+function checker() {
+    let password = prompt("سيتم الحذف، هل أنت متأكد؟")
+    if (password == 'yes') {//todo: password confirmation
+        let xhr = new XMLHttpRequest();
+        let no = document.getElementById("no").innerHTML;//no عنصر من عناصر الصفحة
+        let req = xhr.open('POST', baseUrl + '/delete', true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        // //    console.log('try to sending element to save in db:', _consumer);
+        xhr.send(JSON.stringify({ no: no }));
+
+        console.log("delete")
+    }
+    else {
+        console.log('cancel')
+    }
 }
 
 

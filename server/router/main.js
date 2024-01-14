@@ -49,7 +49,7 @@ router.get('/logout', mainController.logout);
 
 
 
-router.post('/delete/:id',auth.authenticate,del.deleteOne );
+router.post('/delete',auth.authenticate,del.deleteOne );
 
 router.get('/editList',  auth.authenticate,edit.editList);
 router.post('/editList',  auth.authenticate,edit.editList);
