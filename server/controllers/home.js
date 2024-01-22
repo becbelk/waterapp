@@ -1,4 +1,4 @@
 exports.home=(req,res)=>{
     let title='waterApp'
-    res.render('index',{title})
+    res.render('index',{title,count:null,areSaved:null})
 }

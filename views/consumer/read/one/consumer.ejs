@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-6">
+        <div class="div row mx-2 p-2">
+
+            <div class="row">
+                <a href="/edit-one/<%= consumer._id%>" class="col-2 m-1 p-1 btn btn-outline-primary border grow"
+                    onclick="">تعديل</a>
+                <a class="col-1 m-1 p-1 "> </a>
+                <a class="col-2 m-1 p-1 btn btn-outline-danger border grow" onclick="confirm()">&#x1F5D1;حذف</a>
+
+            </div>
+
+        </div>
+        <div class="div row mx-2">
+            <h2 class="h1 px-5 fw-bold">بيانات تفصيلية</h2>
+            <div class="row mx-5">
+                <div class="col-2 h4  mx-2 my-3 p-2 border text-secondary fw-bold"> الرقم التسلسلي :</div>
+                <div id="no" class="col-4 h5  mx-2 my-3 p-2 border text-center  text-secondary fw-bold ">
+                    <%= consumer.no %>
+                </div>
+            </div>
+            <div class=" row mx-5">
+                <div class="col-2 h4 mx-2 my-3 p-2 border"> عداد رقم:</div>
+                <div class="col-4 h5 mx-2 my-3 p-2 text-center fw-bold border text-dark">
+                    <%= consumer.watermeterId %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mx-2 p-2">
+            <div class="row mx-5">
+                <div class="col-2 h5 mx-2 my-3 p-2 border"> اسم ولقب المستهلك:</div>
+                <div class="col-4 h4 mx-2 my-3 p-2 btn btn-outline-primary fw-bold grow">
+                    <%= consumer.name %>
+                </div>
+            </div>
+            <div class=" row mx-5">
+                <div class="col-1 mx-2 my-3 p-2 border">العنوان:</div>
+                <div class="col-5 mx-2 my-3 p-2 border">
+                    <%= consumer.address %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="container mx-4 row">
+            <div>
+                <div>
+                    <h3 class="h4 col-1 mx-3 p-2 border  rounded bg-info fw-bold "> -تفاصيل:</h3>
+                    <%- include("consumptions",{ consumer }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

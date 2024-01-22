@@ -1,20 +1,17 @@
-const Consumer = require('../model/consumer');
-const calc = require('../misc/calculator')
 const search = require('./search');
 
-const Header = 1
 
 // post search
 
 exports.search = async (req, res) => {
     try {
-        const title = 'بحث';
-        const perPage = 10;
         let page = req.query.page || 1;
 
-        let searchTerm=decodeURIComponent(req.cookies.searchTerm);
-    let data=await search.text(searchTerm,page);
-        res.render('index',data );
+        let searchTerm = req.body.searchTerm;
+        let isSaved = (req.body.isSaved == "on") || false //decodeURIComponent(req.cookies.searchTerm);;
+        console.log('body=' + JSON.stringify(req.body))
+        let data = await search.find({ searchTerm, page, isSaved: isSaved, sort: 'no+1' });
+        res.render("consumer/read/table", data);
     } catch (error) {
         console.log(error);
     }

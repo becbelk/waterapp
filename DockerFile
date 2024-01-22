@@ -1,0 +1,7 @@
+FROM node:18.0-alpine
+WORKDIR /waterapp
+COPY . .
+RUN npm install
+CMD ["node", "app.js"]
+#todo docker build -t waterapp . enter #docker desktop
+#todo: .dockerignore

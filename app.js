@@ -7,6 +7,7 @@ const layout = require('express-ejs-layouts');
 
 const connectDb = require('./server/config/db');
 const cookieParser = require('cookie-parser');
+const flash= require('connect-flash');
 const session=require('express-session');
 const mongoStore=require('connect-mongo');
 const mainRouter = require('./server/router/main');
@@ -30,7 +31,8 @@ app.use(session({
         )
           //cookie: { maxAge: new Date ( Date.now() + (3600000) ) } 
     }
-))
+));
+app.use(flash())
 
 
 

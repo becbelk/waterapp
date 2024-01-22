@@ -1,0 +1,29 @@
+<div class=" <%= consumer.isFlatRated==true? 'bg-danger': 'bg-info'%> div row p-5 mx-3">
+
+    <div class="col-1 h5 bg-info text-dark border rounded">
+      الفترة :
+    </div>
+    <div class="col-1 h5 bg-info text-dark border rounded">
+      <%= consumer.periode %>
+    </div>
+    <div class="col-1 h5 bg-info text-dark border rounded">
+      القديم:
+    </div>
+    <div class="col-2 h5 bg-info text-dark border rounded">
+      <%= Number(consumer.oldConsumption).toFixed(2) %>
+    </div>
+    <div class="col-1 h5 bg-info text-dark border rounded">
+      الجديد:
+    </div>
+    <div class="col-2 h5 bg-info text-dark border rounded">
+      <%= Number(consumer.newConsumption).toFixed(2) %>
+    </div>
+
+    <div class="col-1 h5 bg-info  text-dark border rounded">
+      الفرق:
+    </div>
+      <div class="col-3 h5 bg-primary  text-dark fw-bold border rounded">
+      <%= consumer.newConsumption-consumer.oldConsumption %>  <small>متر مكعب</small> 
+    </div> 
+
+</div>

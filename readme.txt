@@ -10,7 +10,7 @@ nodemon
 npm i dotenv express ejs  express-ejs-layouts
      express-session  
      cookie-parser jsonwebtoken 
-     path blob-stream pdfkit pdfkit-table tafgeetjs 
+     path pdfkit pdfkit-table tafgeetjs 
      mongoose  connect-mongo method-override bootstrap brfs 
     في حالة عدم وجود مكتبة تثبت مثل ماسبق
     npm i [اسم المكتبة]

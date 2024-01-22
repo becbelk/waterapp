@@ -1,13 +1,5 @@
 <form action="/editList" method="POST">
    <div class="row">
-      <div class="col-7">
-         <input class="col-4" name="searchTerm" id="searchTerm" placeholder="البحث بالاسم او العنوان" value="">
-         <input class="col-2 btn btn-outline-success shadow-sm fw-bold" id="sender" type="submit" value="بحث"
-            onclick="saveSearchZone()">
-         <a href="#" class="col-2"></a>
-         <a href="#" id="desplayCount" class="col-2">العدد :<%= count%> مستهك</a>
-         <a href="#" id="deleteSearchCookie" class="col-2 btn btn-danger fw-bold" onclick="setCookie('searchTerm','',2)">إلغاء البحث</a>
-      </div>
       <div class="col-5">
          <a href="/editList/?page=1" class="col-1  btn btn-outline-success shadow-sm">اﻷولى</a>
          <% if (hasPreviousPage) { %>
@@ -28,15 +20,6 @@
                   <a href="#" class="col-1 px-3">
                      <%= pages %> صفحات
                   </a>
-      </div>
-   </div>
-</form>
-<form action="/searchByNo" method="POST">
-   <div class="row">
-      <div class="col-7">
-         <label href="">البحث بالرقم</label>
-         <input type="text" name="searchNumber">
-         <input type="submit" name="submit" class="btn btn-outline-danger" value="بحث بالرقم">
       </div>
    </div>
 </form>

@@ -1,0 +1,27 @@
+<form action="/search" method="POST">
+    <div class="row" id="searchRow">
+        <div class="mx-5 p-2 col-7">
+            <input name="searchTerm" id="searchTerm" class="col-3 p-1" placeholder="بحث" value="">
+            <input class="col-3 btn btn-outline-success  shadow-sm fw-bold" id="sender" type="submit" value="بحث">
+            <a href="/cancel" class="col-1 btn btn-outline-danger text-dark border-0 ">X</a>
+            <div class="col-4 form-check form-switch flex">
+                <input class="col-2 form-check-input" type="checkbox" id="checkBoxIsSaved"
+                 name="isSaved"  <%= (areSaved)? 'checked':'' %>>
+                <label class="col-10 form-check-label" id="checkBoxIsSavedLabel">المحينة</label>
+            </div>
+            <p class="col-4 h6">نتــيجــة البــحث :<%= count??=- %>- عــدد الصــفحات :<%= pages %> </p>
+
+        </div>
+        <div class="m-1 col-4">
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">1</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">2</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">3</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">4</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">5</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">6</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">7</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">8</a>
+            <a href="#" class=" col-1 btn btn-outline-success  border-0">9</a>
+        </div>
+    </div>
+</form>

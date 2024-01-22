@@ -1,7 +1,5 @@
 const Consumer = require('../../model/consumer');
 const pdf = require('./print/pdf_controller');
-const fs = require('fs')
-const path = require('path')
 const global = require('../../misc/global')
 
 

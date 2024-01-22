@@ -1,0 +1,50 @@
+<form action="/edit-one/<%= consumer._id %>" method="POST">
+    <div class="row p-2 m-2">
+        <div class="col-6 p-3 border bg-info">
+            <div></div>
+            <label for="newConsumption">اسم المستهلك</label>
+
+            <input type="text" class="col-3 bg-light  rounded fw-bold text-dark" name="name" placeholder="اسم المستهلك"
+                value="<%= consumer.name %>">
+            <label class="col-1" for="newConsumption">العنوان</label>
+            <input type="text" class="col-4 bg-light  rounded fw-bold text-dark" name="address" placeholder="العنوان"
+                value="<%= consumer.address %>">
+            <div class="row m-2">
+                <label class=" m-1 col-3" for="newConsumption">رقم العداد</label>
+                <input type="text" class="col-3   bg-light border rounded fw-bold text-dark" name="watermeterId"
+                    placeholder="رقم العداد" value="<%= consumer.watermeterId %>">
+            </div>
+        </div>
+        <div class="col-6 border bg-info">
+
+            <label class="col-1 p-1 bg-light  rounded fw-bold text-dark" for="newConsumption">القديم</label>
+            <input name="oldConsumption" class="col-2  p-1 bg-light border rounded fw-bold text-dark"
+                value="<%= consumer.oldConsumption%>">
+            <a href="#" class="col-1 bg-light  rounded fw-bold text-dark"></a>
+
+            <label class="col-1   p-1 bg-light  rounded fw-bold text-dark" for="newConsumption">الجديد</label>
+            <input name="newConsumption" class="col-2  p-1 bg-light border rounded fw-bold text-dark"
+                value="<%= consumer.newConsumption%>">
+            <div class="row m-2 p-2">
+                <label class="col-1   p-1 bg-light  rounded fw-bold text-dark" for="newConsumption">جزافي</label>
+                <input name="isFlatRated" type="checkbox" class="col-2  p-1 bg-light border rounded fw-bold text-dark"
+                    <%- consumer.isFlatRated==true ? "checked" : "unchecked" %>>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="row m-5 p-5 justify-content-center">
+            <input type="submit" class="col-1  p-1 btn btn-outline-success shadow-sm" value="تأكيد">
+        </div>
+
+    </div>
+    <div class="row">
+        <h1 class="centered">تغيير بيانات المستهلك <%= consumer.name %>
+        </h1>
+    </div>
+
+</form>
