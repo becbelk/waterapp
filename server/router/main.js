@@ -22,7 +22,11 @@ const api=require('../controllers/read/getall')
 
 router.get('/home',auth.authenticate,home.home)
 router.get('/view-all',auth.authenticate,list.show);
-router.post('/search', auth.authenticate,list.show);
+/**
+ * Get
+ * 
+ */
+router.get('/search', auth.authenticate,list.show);
 
 router.get('/cancel',auth.authenticate, list.reset);
 
@@ -49,8 +53,10 @@ router.get('/printInvoices', auth.authenticate,print.printInvoices);
 
 
 
-router.get('/about', auth.authenticate,mainController.about);
 
+
+
+router.get('/about', auth.authenticate,mainController.about);
 router.get('/logout', mainController.logout);
 
 

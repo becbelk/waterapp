@@ -1,6 +1,5 @@
 const Consumer = require('../model/consumer');
 const global = require('../misc/global');
-const mongoose = require('mongoose');
 const { formatNo } = require('../misc/string_op');
 
 MAX = "1000000000";
@@ -28,22 +27,18 @@ const perPage = 10;
 
 
 exports.find = async ({ searchTerm, page, isSaved, sort }) => {
-    let count = 0;
+   
     let stages = {};
-    isSaved=(isSaved=='on')
     let initialStages = toStages(searchTerm)
-    // console.log('initialStages  =', initialStages);
     updatedStages = ("$match" in initialStages) ?
         { ...initialStages, $match: { ...initialStages["$match"], saved: isSaved, "consumptions.periode": global.context.periode } }
         : { ...initialStages, $match: { saved: isSaved, "consumptions.periode": global.context.periode } }
     console.log('initialStages updated =', updatedStages);
     stages = buildStages({ query: updatedStages, sortingWith: sort, paginationTo: page })
-    // console.log('final stage updated =', finalStages);
 
     let countQuery = buildCountQuery(initialStages, isSaved);
     console.log('forCountQuery=', countQuery);
-    count = await Consumer.countDocuments(countQuery);
-    console.log('count=', count)
+   let count = await Consumer.countDocuments(countQuery);
 
     let consumers = await Consumer.aggregate(stages);
     let pages = Math.ceil(count / perPage);
@@ -51,9 +46,7 @@ exports.find = async ({ searchTerm, page, isSaved, sort }) => {
     const previousPage = parseInt(page) - 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
     const hasPreviousPage = previousPage >= 1;
-
-    // console.log('type=', JSON.stringify(consumers))
-    return { consumers, count, pages, hasNextPage,
+    return { consumers, count, pages, hasNextPage,currentPage:page,
          nextPage, hasPreviousPage, previousPage, areSaved:isSaved }
 
 }
@@ -61,7 +54,6 @@ exports.find = async ({ searchTerm, page, isSaved, sort }) => {
 
 const buildStages = ({ query, sortingWith, paginationTo }) => {
     let matchStage = { $match: query["$match"] };
-    //    console.log('matchStage  =========', matchStage)
 
     let page = paginationTo;
     let sort = sortingWith;
@@ -83,7 +75,8 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
             oldConsumption: "$consumptions.oldConsumption",
             newConsumption: "$consumptions.newConsumption",
             isFlatRated: "$consumptions.isFlatRated",
-            editedAt: "$redactions.time"//******** 
+            editedAt: "$redactions.time",//******** 
+            saved:1
         }
     },
     {
@@ -93,6 +86,7 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
                 no: "$no",
                 name: "$name",
                 address: "$address",
+                saved:"$saved",
                 watermeterId: "$watermeterId",
                 oldConsumption: "$oldConsumption",
                 newConsumption: "$newConsumption",
@@ -111,8 +105,8 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
             oldConsumption: "$_id.oldConsumption",
             newConsumption: "$_id.newConsumption",
             isFlatRated: "$_id.isFlatRated",
-            editedAt: "$editedAt"//******** 
-
+            editedAt: "$editedAt",
+            saved:"_id.saved",
         }
     },
 
@@ -240,6 +234,6 @@ const buildCountQuery = (stages, isSaved) => {
         console.log('match exist')
         if ("$match" in stages)
             return { ...stages["$match"], saved: isSaved }
-        else return {}
+        else return {saved:isSaved}
     }
 }

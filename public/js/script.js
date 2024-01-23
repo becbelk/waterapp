@@ -160,10 +160,11 @@ $('#save-btn').on('click', function (event) {
 $('#checkBoxIsSaved').on('change', function (event) {
     let chkbx = $(this);
     let parent = $(this.parentElement).find('#checkBoxIsSavedLabel');
-    parent.text(chkbx.is(':checked') ? 'المحينة' : 'غير المحينة')
-    let sender = $(this.parentElement.parentElement).find('#sender');
-    console.log('sender=', sender)
-    sender.trigger('click');
+    parent.text(chkbx.is(':checked') ? 'المحينين':'في الانتظار')
+    this.value=chkbx.is(':checked')? 'saved':'not-saved';
+ //   let sender = $(this.parentElement.parentElement).find('#sender');
+   // console.log('sender=', sender)
+    //sender.trigger('click');
 })
 /*
 $('#sender').on('click', function (event) {

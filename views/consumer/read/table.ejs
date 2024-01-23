@@ -31,11 +31,16 @@
                     <td>
                         <%= consumer.address %>
                     </td>
-                    <td>
-                        <%= consumer.oldConsumption %>
-                    </td>
-                    <td>
-                        <%= consumer.newConsumption %>
+                    <td <% if (consumer.saved==true) { %>class= "bg-primary fw-bold"
+                        <% } else{ %>  class= "text-dark"    <% }%> >
+                        <%= consumer.oldConsumption %></td>
+                    <td <% if (consumer.saved==true) { %>
+                        class= "bg-primary fw-bold"
+                        <% } else{ %>
+                            class= "text-dark"
+                            <% }%>
+                                >
+                                <%= consumer.newConsumption %>
                     </td>
                     <td>
                         <%= consumer.isFlatRated? "جزافي" :"" %>
@@ -60,10 +65,6 @@
 
 
 
-
-
-
-
 <div class="modal fade" id="view-one-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -80,7 +81,7 @@
                     <div class="row">
                         <label for="recipient-name" class="col-2">العداد:</label>
                         <input type="text" class="col-5" name="watermeterId">
-                        
+
                         <label for="recipient-name" class="col-2">جزافي</label>
                         <input type="checkbox" class="col-2" name="isFlatRated">
                         <div class="col-6">
