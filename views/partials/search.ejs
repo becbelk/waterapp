@@ -1,44 +1,102 @@
-<form action="/search" method="GET">
-    <div class="row" id="searchRow">
-        <div class="mx-5 p-2 col-6">
-            <input name="searchTerm" type="search" id="searchTerm" class="col-3 p-1" placeholder="بحث" value="">
-            <input class="col-3 btn btn-outline-success  shadow-sm fw-bold" id="sender" type="submit" value="بحث">
-            <a href="/cancel" class="col-1 btn btn-outline-danger text-dark border-0 ">X</a>
-            <div class="col-4 form-check form-switch flex">
-                <input class="col-2 form-check-input" type="checkbox" id="checkBoxIsSaved"
-                 name="isSaved"  <%= (areSaved==true)?  "checked":"" %> 
-                 value="<%= (areSaved==true)?  'saved':'not-saved'%>">
-                <label class="col-10 form-check-label" id="checkBoxIsSavedLabel"><%(areSaved==true)? 'المحينين':'في الانتظار' %></label>
-            </div>
-            <p class="col-6 h6">نتـيجـة البــحث :<%= count %> عــدد الصـفحات :<%= pages %> </p>
+<% let maxPage=9;let totalLinks=pages>maxPage? maxPage: pages;let middle=(pages>maxPage)? 5:Math.ceil(pages/2);let
+    startLink=(pages>maxPage && currentPage>=middle)? Number(currentPage)-Math.floor(totalLinks/2): 1; let
+    endLink=(pages>maxPage && currentPage<= Number(pages)-Number(middle))?
+        Number(currentPage)+Math.floor(totalLinks/2):pages;endLink=(endLink<maxPage && pages>maxPage)?
+        maxPage:endLink;startLink=(pages-startLink<maxPage && pages>maxPage)? pages-maxPage:startLink;let
+            position=currentPage<=middle? currentPage:middle ;%>
 
-        </div>
+                <form action="/search" method="GET">
+                    <div class="row" id="searchRow">
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="col-8" name="searchTerm" type="search" id="searchTerm"
+                                        placeholder="بحث" value="">
+                                    <input class="col-3 btn btn-outline-success  shadow-sm fw-bold h2" id="sender"
+                                        type="submit" value="بحث">
+                                </div>
+                                <div class="col-2 form-check form-switch flex">
+                                    <label class="col-9 form-check-label" id="checkBoxIsSavedLabel">
+                                        <%(areSaved==true)? 'المحينين' :'في الانتظار' %>
+                                    </label>
+                                    <input class="col-2 form-check-input" type="checkbox" id="checkBoxIsSaved"
+                                        name="isSaved" <%=(areSaved==true)? "checked" :"" %> value="<%=
+                                        (areSaved==true)? 'saved' :'not-saved'%>">
+                                       
+                                </div>
+                                <div class="col-4">
+                                    <p class=" h6">نتيجة البحث :<%= count %> عـدد الصفحات :<%= pages %>
+                                    </p>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col-2">
+                                    <a href="<%=  passedQuery %>&page=1"
+                                        class="col-5 btn btn-outline-success rounded  border-0 fw-bold">
+                                        |< </a>
+                                            <% if(Number(currentPage)-100>1){ %>
+                                                <a href="<%=  passedQuery %>&page=<%=currentPage-100%>"
+                                                    class=" col-4 btn btn-outline-danger rounded-circle text-center border-0 fw-bold">
+                                                    << </a>
+                                                        <% } else{%>
+                                                            <a href="#"
+                                                                class="col-4 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                                << </a>
+                                                                    <% } %>
 
-
-
-        <div class="m-1 col-5">
-            <% let totalLinks=pages>9? 9: pages;%>
-            <% let middle=(pages>9)? 5:Math.ceil(pages/2); %>
-            <% let startLink=(pages>9 && currentPage>=middle)?  Number(currentPage)-Math.floor(totalLinks/2): 1;%>
-            <% let endLink=(pages>9 && currentPage<= Number(pages)-Number(middle))?  Number(currentPage)+Math.floor(totalLinks/2):pages;%>
-            <% endLink=(endLink<9 && pages>9)? 9:endLink;%>
-            <% startLink=(pages-startLink<9 && pages>9)? pages-9:startLink;%>
-            <% let position=currentPage<=middle? currentPage:middle ; %>
-            <% if(Number(currentPage)-100>1){ %>
-                <a href="/view-all/?page=<%=currentPage-100%>" class=" col-1 btn btn-outline-danger rounded-circle  border-0 fw-bold"> <<  </a>
-                <% } %>
- 
-            <% for (index=startLink;index<=endLink;index++){%>
-                <% if (index==currentPage){%>
-                    <a href="/view-all/?page=<%=index%>" class=" col-1 btn btn-outline-primary rounded-circle  border-0 fw-bold"><%= index  %></a>
-            <%    }  else {%>
-            <a href="/view-all/?page=<%=index%>" class=" col-1 btn btn-outline-secondary rounded-circle  border-0"><%= index  %></a>
-            <% }} %>
-            <% if(Number(currentPage)+100<pages){ %>
-                <a href="/view-all/?page=<%= Number(currentPage)+100%>" class=" col-1 btn btn-outline-danger rounded-circle  border-0 fw-bold"> >> </a>
-
-                <% } %>
-        </div>
-    </div>
-</form>
+                                                                        <% if(Number(currentPage)-maxPage+1>
+                                                                            1){
+                                                                            %>
+                                                                            <a href="<%=  passedQuery %>&page=<%=currentPage-maxPage+1%>"
+                                                                                class="col-2 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                                                < </a>
+                                                                                    <% } else{%>
+                                                                                        <a href="#"
+                                                                                            class=" col-2 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                                                            < </a>
+                                                                                                <% } %>
+                                </div>
+                                <div class="col-8">
+                                    <% for (index=startLink;index<=endLink;index++){%>
+                                        <% if (index==currentPage){%>
+                                            <a href="<%=  passedQuery %>&page=<%=index%>"
+                                                class=" col-1 btn btn-outline-primary rounded  border-0 fw-bold">
+                                                <%= index %>
+                                            </a>
+                                            <% } else {%>
+                                                <a href="<%=  passedQuery %>&page=<%=index%>"
+                                                    class=" col-1 btn btn-outline-dark rounded-circle  border-0">
+                                                    <%= index %>
+                                                </a>
+                                                <% }} %>
+                                </div>
+                                <div class="col-2">
+                                    <% if(Number(currentPage)+maxPage+1<pages){ %>
+                                        <a href="<%=  passedQuery %>&page=<%= Number(currentPage)+maxPage+1%>"
+                                            class="col-2 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                            > </a>
+                                        <% } else{%>
+                                            <a href="#"
+                                                class="col-2 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                > </a>
+                                            <% } %>
+                                                <% if(Number(currentPage)+100<pages){ %>
+                                                    <a href="<%=  passedQuery %>&page=<%= Number(currentPage)+100%>"
+                                                        class="col-4 btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                        >> </a>
+                                                    <% } else{%>
+                                                        <a href="#"
+                                                            class="col-4  btn btn-outline-danger rounded-circle  border-0 fw-bold">
+                                                            >> </a>
+                                                        <% } %>
+                                                            <a href="<%=  passedQuery %>&page=<%= pages%>"
+                                                                class="col-5 btn btn-outline-success rounded  border-0 fw-bold">
+                                                                >| </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>

@@ -66,7 +66,7 @@ exports.registerForm = async (req, res) => {
     try {
         title = 'فتح حساب'
         console.log('[*]->[admin router]: regisister Form');
-        res.render('create/admin/register', { title, layout: splashLayout })
+        res.render('admin/register', { title, layout: splashLayout })
     } catch (e) {
         console.log(e);
     }

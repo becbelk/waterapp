@@ -1,4 +1,4 @@
-const calculator = require('../../../misc/calculator');
+const calculator = require('../../../../misc/calculator');
 
 const b = `
 `;

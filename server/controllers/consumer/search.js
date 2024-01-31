@@ -1,6 +1,6 @@
-const Consumer = require('../model/consumer');
-const global = require('../misc/global');
-const { formatNo } = require('../misc/string_op');
+const Consumer = require('../../model/consumer');
+const global = require('../../misc/global');
+const { formatNo } = require('../../misc/string_op');
 
 MAX = "1000000000";
 const sorts = {
@@ -31,8 +31,8 @@ exports.find = async ({ searchTerm, page, isSaved, sort }) => {
     let stages = {};
     let initialStages = toStages(searchTerm)
     updatedStages = ("$match" in initialStages) ?
-        { ...initialStages, $match: { ...initialStages["$match"], saved: isSaved, "consumptions.periode": global.context.periode } }
-        : { ...initialStages, $match: { saved: isSaved, "consumptions.periode": global.context.periode } }
+        { ...initialStages, $match: { ...initialStages["$match"], saved: isSaved,deleted:false, "consumptions.periode": global.context.periode } }
+        : { ...initialStages, $match: { saved: isSaved,deleted:false, "consumptions.periode": global.context.periode } }
     console.log('initialStages updated =', updatedStages);
     stages = buildStages({ query: updatedStages, sortingWith: sort, paginationTo: page })
 
@@ -53,12 +53,12 @@ exports.find = async ({ searchTerm, page, isSaved, sort }) => {
 
 
 const buildStages = ({ query, sortingWith, paginationTo }) => {
-    let matchStage = { $match: query["$match"] };
+    let matchStage = { $match: query["$match"] ,};
 
     let page = paginationTo;
     let sort = sortingWith;
     let textStage = ('$text' in query && query["$text"]["$search"]) ?
-        [{ $match: { $text: query["$text"] } }]
+        [{ $match: { $text: query["$text"] } ,}]
         : [];
 
     let unwindStages = [
@@ -183,7 +183,7 @@ const cancelStages = () => {
 
 const toStages = (maybeStr) => {
     if (/^[\d]+$/.test(maybeStr)) {
-        return { $match: { no: formatNo(maybeStr) } };
+        return { $match: { no: formatNo(maybeStr) ,} };
     }
     else {
         return queryBetweenTwoNumbers(maybeStr)
@@ -196,7 +196,7 @@ const queryBetweenTwoNumbers = (maybeStr) => {
 
     if (/^[\d]+[\s]*(-)[\s]*[\d]+$/.test(maybeStr)) {
         let interval = maybeStr.split('-');
-        return { $match: { no: inBetween({ interval: interval }) } };
+        return { $match: { no: inBetween({ interval: interval }) ,} };
     } else {
         return queryText(maybeStr);
     }
@@ -205,11 +205,11 @@ const queryBetweenTwoNumbers = (maybeStr) => {
 const queryText = (maybeStr) => {
 
     if (/^[\u0621-\u064A\/]+$/.test(maybeStr)) {
-        return { $text: { $search: maybeStr } }
+        return { $text: { $search: maybeStr },  }//todo
     }
     else {
         console.log('not text or empty');
-        return {/* $text: { $search: "" } */ };
+        return { };
     }
 }
 
@@ -228,12 +228,12 @@ const buildCountQuery = (stages, isSaved) => {
     if ("$text" in stages) {
         console.log('text exist')//todo:empty text
         return {
-            $text: stages["$text"], saved: isSaved
+            $text: stages["$text"], saved: isSaved,
         }
     } else {
         console.log('match exist')
         if ("$match" in stages)
-            return { ...stages["$match"], saved: isSaved }
-        else return {saved:isSaved}
+            return { ...stages["$match"], saved: isSaved, }
+        else return {saved:isSaved,}
     }
 }

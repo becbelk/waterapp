@@ -2,26 +2,24 @@
     <a class="col-2"></a>
 
     <div class="layered-icon col-2 grow ">
-        <a href="/new">
-            <div class="row">
-                <img class="logo" src="../img/watermeter-2.png" alt="print">
-            </div>
-            <div class="row">
-                <a href="#" class="layer3-icon h2">إضافة عداد جديد</a>
-            </div>
-        </a>
+        <button class=" btn btn-warning btn-small circle rounded-circle centered" data-bs-toggle="modal"
+        data-bs-target="#new-one-modal"
+        data-consumer="watermeterId'"> <img src="/img/watermeter-2.png"  class="logo" alt="new">
+        مستهلك جديد</button>
+        
+
     </div>
 
     <a class="col-1"></a>
 
     <div class="layered-icon col-2 grow ">
         <div class="row">
-            <a href="/view-all">
+            <a href="/view-all" class=" btn btn-warning btn-small circle rounded-circle centered">
                 <img class="logo" src="../img/view-details-4.png" alt="قائمة المستهلكين">
             </a>
         </div>
         <div class="row">
-            <a href="#" class="layer3-icon h1">القائمة</a>
+            <a href="#" class="layer3-icon h4 text-center">القائمة</a>
         </div>
     </div>
 
@@ -29,14 +27,59 @@
 
     <div class="layered-icon col-2 grow ">
         <div class="row">
-        <a href="/print">
+        <a href="/print" class="btn btn-warning btn-small circle rounded-circle centered">
             <img class="logo" src="../img/print-icon-2.png" alt="print">
         </a>
         </div>
         <div class="row">
-            <a href="#" class="layer3-icon h1">طباعة</a>
+            <a href="#" class="layer3-icon h4">طباعة</a>
         </div>
     </div>
     <a class="col-2"></a>
 
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="new-one-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-info" id="content-modal">
+            <div class="modal-header">
+                <h5 class="h6 modal-title " id="exampleModalLabel">مستهلك جديد رقم:</h5>
+                <input class="h6 modal-title bg-info border-0" disabled name="no">
+                <button type="button" class="close bg-danger" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <label for="recipient-name" class="col-2">العداد:</label>
+                        <input type="text" class="col-5" name="watermeterId">
+
+                        <div class="col-6">
+                            <label for="recipient-name" class="col-form-label">الاسم:</label>
+                            <input type="text" class="form-control" name="name">
+                            <label for="recipient-name" class="col-form-label">القديم:</label>
+                            <input type="text" class="form-control" name="oldConsumption" value="">
+                        </div>
+                        <div class="col-6">
+                            <label for="message-text" class="col-form-label">العنوان:</label>
+                            <input type="text" class="form-control" name="address">
+                            <label for="recipient-name" class="col-form-label">الجديد:</label>
+                            <input type="text" class="col-3 form-control" name="newConsumption">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancel-btn" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" id="new-btn" class="btn btn-success " data-bs-dismiss="modal">تخزين</button>
+            </div>
+        </div>
+    </div>
 </div>

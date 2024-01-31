@@ -1,5 +1,5 @@
-const stringOp=require('../../../misc/string_op');
-const calculator=require('../../../misc/calculator');
+const stringOp=require('../../../../misc/string_op');
+const calculator=require('../../../../misc/calculator');
 
 exports. add = (acc, _element) => {
     // addition between umbers in acc and neumbers in element ==> acc

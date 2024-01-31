@@ -1,6 +1,6 @@
-const Consumer = require('../../../model/consumer');
+const Consumer = require('../../../../model/consumer');
 
-const global = require('../../../misc/global')
+const global = require('../../../../misc/global')
 
 /**
  * POST

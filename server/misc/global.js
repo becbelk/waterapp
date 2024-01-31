@@ -1,5 +1,7 @@
 exports.context = {
     periode: "2022",
+    labelPeriodeL1: "الفترة الممتدة من 01 جانفي 2023",
+    labelPeriodeL2: "إلى غاية 31 ديسمبر 2023",
     PAPC: 'عبد الحفيظ سلطاني',
     organization: 'بلدية تكوت',
     titleOfInvoice: ' كشف عداد المياه للاستعمال المنزلي والصناعي ',

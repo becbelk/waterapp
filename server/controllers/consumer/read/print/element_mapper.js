@@ -1,4 +1,4 @@
-const calculator=require('../../../misc/calculator');
+const calculator=require('../../../../misc/calculator');
 exports.rowMappedFrom = (item) => {
     ///choose an element i in list[list]
     // if it is null should be 0

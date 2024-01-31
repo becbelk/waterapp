@@ -31,6 +31,7 @@ const consumerSchema = Schema({
     watermeterId:  { type: String, defaut:'//', },// رقم العداد
     consumptions: [consumptionSchema],// قائمة الاستهلاكات حسب الفترات
     redactions: [redactionSchema],//todo: memento pattern
+    deleted:{type:Boolean,default:false},
     saved:{type:Boolean,default:false},
     hash: { type: String, default: '0' },//todo: use bcrypt
 });

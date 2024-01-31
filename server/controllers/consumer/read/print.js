@@ -1,13 +1,12 @@
-const Consumer = require('../../model/consumer');
+const Consumer = require('../../../model/consumer');
 const pdf = require('./print/pdf_controller');
-const global = require('../../misc/global')
+const global = require('../../../misc/global')
 
 
 
-exports.printePage = async (req, res) => {
+exports.main = async (req, res) => {
     const title = 'تسيير استهلاك المياه-تعديل بيانات المستهلك';
-    //todo: add query
-    res.render('read/print/main');
+    res.render('consumer/read/print/main',{pages:-1});
 }
 
 
@@ -38,7 +37,7 @@ exports.printList = async (req, res) => {
 
     const list = await Consumer.aggregate([
         {$unwind:"$consumptions"},
-       {$match:{saved:true,"consumptions.periode":global.context.periode}},
+       {$match:{saved:true,deleted:false,"consumptions.periode":global.context.periode}},
        {$project: {
                 no: 1,
                 name: 1,

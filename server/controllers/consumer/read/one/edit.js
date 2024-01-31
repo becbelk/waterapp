@@ -1,7 +1,7 @@
 const search = require('../../search');
-const stringOp = require('../../../misc/string_op');
-const Consumer = require('../../../model/consumer');
-const global = require('../../../misc/global');
+const stringOp = require('../../../../misc/string_op');
+const Consumer = require('../../../../model/consumer');
+const global = require('../../../../misc/global');
 const mongoose = require('mongoose');
 /**
  *  GET paginated view

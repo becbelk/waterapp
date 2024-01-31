@@ -1,6 +1,6 @@
 const op = require('./rows_operations');
-const stringOp = require('../../../misc/string_op');
-const calculator = require('../../../misc/calculator');
+const stringOp = require('../../../../misc/string_op');
+const calculator = require('../../../../misc/calculator');
 const rop = require('./rows_operations')
 
 const _dx0 = 50;
@@ -125,13 +125,13 @@ const mapDataToList = (currentData, context) => {
     _resultList.push(Number(invoice.amounts[2] ??= 0).toFixed(2))
     _resultList.push(Number(invoice.amounts[1] ??= 0).toFixed(2))
     _resultList.push(Number(invoice.amounts[0] ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.edges[3] ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.edges[2] ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.edges[1] ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.edges[0] ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.diff ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.oldC ??= 0).toFixed(2))
-    _resultList.push(Number(invoice.newC ??= 0).toFixed(2))
+    _resultList.push(Number(invoice.edges[3] ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.edges[2] ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.edges[1] ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.edges[0] ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.diff ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.newC ??= 0).toFixed(0))
+    _resultList.push(Number(invoice.oldC ??= 0).toFixed(0))
     _resultList.push(currentData.name)
     _resultList.push(currentData.watermeterId)
     _resultList.push(currentData.no)

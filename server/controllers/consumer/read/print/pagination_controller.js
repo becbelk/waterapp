@@ -4,14 +4,14 @@ const invoiceBuilder = require('./a4_invoice_builder');
 const headerBuilder = require('./headless_settings');
 const options = require('./waterapp_table_options');
 const op = require('./rows_operations')
-const stringOp = require('../../../misc/string_op');
+const stringOp = require('../../../../misc/string_op');
 const init= require('./header_footer_initializer')
 const fontName = 'Amiri';
 
 const footerSum = init.zeroRow;
 const headerSum = init.zeroRow
 
-exports.a3Report = (doc, datas, context) => {
+exports.a3Report =async (doc, datas, context) => {
     console.log('->[*] {paginateReport} ');
     const {rowsInPage,rowsInFirstPage}=a3Configuration(doc)
  
@@ -55,7 +55,7 @@ exports.a4Invoices = async (doc, datas, context) => {
     const rowsInPage = Math.floor(pageHeight / rowHeight);//- 7;//28
     console.log('pageHeight=', pageHeight, 'rowsInPage=', rowsInPage,)
     const pagesCount = Math.ceil(datas.length / rowsInPage);
-    for (let i = 0; i < pagesCount; i++) {//todo dont forget pagecount
+    for (let i = 0; i < pagesCount; i++) {//todo dont forget pageCount
         if (i > 0) {
             doc.addPage();
         }

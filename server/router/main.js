@@ -5,15 +5,16 @@ const auth=require('./auth')
 //const src=require('./real'); real database in json 
 //const mk=require('../misc/mockdata.js');
 
-const list=require("../controllers/read/list.js")
+const list=require("../controllers/consumer/read/list.js")
 const home=require("../controllers/home.js")
-const print=require("../controllers/read/print.js")
-const edit=require("../controllers/read/one/edit.js")
-const update=require('../controllers/update/one/consumer.js');
-const create=require('../controllers/create/create')
-const display1=require('../controllers/read/display_one');
-const del=require('../controllers/delete/delete')
-const api=require('../controllers/read/getall')
+const print=require("../controllers/consumer/read/print.js")
+const edit=require("../controllers/consumer/read/one/edit.js")
+const update=require('../controllers/consumer/update/one/consumer.js');
+const create=require('../controllers/consumer/create/create')
+const display1=require('../controllers/consumer/read/display_one');
+const del=require('../controllers/consumer/delete/delete')
+const api=require('../controllers/consumer/read/getall')
+const counter=require('../controllers/counter/read')
 
 /**
  * get home page
@@ -21,35 +22,33 @@ const api=require('../controllers/read/getall')
  */
 
 router.get('/home',auth.authenticate,home.home)
+// *  Consuer [Read]
 router.get('/view-all',auth.authenticate,list.show);
 /**
- * Get
+ *  Consuer [Update]
  * 
  */
 router.get('/search', auth.authenticate,list.show);
+router.get('/edited', auth.authenticate,list.edited);
+router.get('/unedited', auth.authenticate,list.unedited);
 
 router.get('/cancel',auth.authenticate, list.reset);
 
 
 router.post('/save-row', auth.authenticate, update.one);
-//router.post('/edit-one',auth.authenticate, update.byId);
 
+router.get('/get-counter', auth.authenticate,counter.getNo);
 
+// Consumer [Create]
 
-//router.get('/consumer/:id', auth.authenticate,display1.showConsumerDetails);
-
-
-
-
-//router.get('/new',auth.authenticate, create.newConsumerForm);
-router.post('/new',auth.authenticate, create.saveNewConsumer);
+router.post('/new',auth.authenticate, create.newConsumer);
 
 
 
 //home page of print
-router.get('/print', auth.authenticate,print.printePage); 
-router.get('/printList', auth.authenticate,print.printList);
-router.get('/printInvoices', auth.authenticate,print.printInvoices);
+router.get('/print', auth.authenticate,print.main); 
+router.get('/print-list', auth.authenticate,print.printList);
+router.get('/print-invoices', auth.authenticate,print.printInvoices);
 
 
 

@@ -1,6 +1,7 @@
 const op = require('./rows_operations');
-const stringOp = require('../../../misc/string_op');
-const calculator = require('../../../misc/calculator');
+const stringOp = require('../../../../misc/string_op');
+const calculator = require('../../../../misc/calculator');
+const global = require('../../../../misc/global');
 
 
 
@@ -87,55 +88,57 @@ const putDataInInvoice = (currentData, doc, invoiceWidth, xmin, xmax, y, context
         .font('Amiri',);
     print(doc, 12, context.organization, _x[21], y-_y[1]/2);
     print(doc, 18, context.titleOfInvoice, _x[7], y-_y[1]/2);
-    print(doc, 10, 'للفترة', _x[5], y-_y[1]/2);
-    print(doc, 10, context.periode, _x[1], y-_y[1]/2);
+    print(doc, 10, global.context.labelPeriodeL1, _x[1], y-_y[1]/2);
+    print(doc, 10, global.context.labelPeriodeL2, _x[2], y-_y[0]/2);
     
     print(doc, 10, 'رقم : ', _x[22], y+_y[1]);
-    print(doc, 10, currentData.no, _x[20], y+_y[1]);
-    print(doc, 10, 'اللقب والاسم:', _x[17], y+_y[1]);
-    print(doc, 10,currentData.name , _x[14], y+_y[1]);
-    print(doc, 10,'العداد: ' , _x[12], y+_y[1]);
+    print(doc, 10, currentData.no, _x[21], y+_y[1]);
+    print(doc, 10, 'اللقب والاسم:', _x[19], y+_y[1]);
+    print(doc, 10,currentData.name , _x[16], y+_y[1]);
+    print(doc, 10,'العداد: ' , _x[14], y+_y[1]);
     print(doc, 10,currentData.watermeterId , _x[11], y+_y[1]);
-    print(doc, 10,'القديم:',_x[10], y+_y[1]);
-    print(doc, 10,Number(invoice.oldC).toFixed(0) , _x[9], y+_y[1]);//todo: error
-    print(doc, 10,'الجديد:' , _x[8], y+_y[1]);
-    print(doc, 10,Number(invoice.newC).toFixed(0) , _x[7], y+_y[1]);
-    print(doc, 10,'الفرق:' , _x[6], y+_y[1]);
-    print(doc, 10,Number(invoice.diff).toFixed(0) , _x[5], y+_y[1]);
+    print(doc, 10,'القديم:',_x[9], y+_y[1]);
+    print(doc, 10,Number(invoice.oldC).toFixed(0) , _x[8], y+_y[1]);//todo: error
+    print(doc, 10,'الجديد:' , _x[6], y+_y[1]);
+    print(doc, 10,Number(invoice.newC).toFixed(0) , _x[5], y+_y[1]);
+    print(doc, 10,'الفرق:' , _x[3], y+_y[1]);
+    print(doc, 10,Number(invoice.diff).toFixed(0) , _x[2], y+_y[1]);
     
     
 
-    print(doc, 10,'1 : 25 م ', _x[20], y+_y[2]);
-    print(doc, 10,Number(invoice.edges[0]??='0').toFixed(2), _x[19], y+_y[2]);
-    print(doc, 10,Number(invoice.amounts[0]??='0').toFixed(2), _x[19], y+_y[3]-7);
+    print(doc, 10,'1 : 25 م ', _x[21], y+_y[2]);
+    print(doc, 10,Number(invoice.edges[0]??='0').toFixed(0), _x[20], y+_y[2]);
+    print(doc, 10,Number(invoice.amounts[0]??='0').toFixed(2), _x[20], y+_y[3]-7);
     
-    print(doc, 10,'2 : 55 م ', _x[17], y+_y[2]);
-    print(doc, 10,Number(invoice.edges[1]??='0').toFixed(2), _x[16], y+_y[2]);
-    print(doc, 10,Number(invoice.amounts[1]??='0').toFixed(2), _x[16], y+_y[3]-7);
+    print(doc, 10,'2 : 55 م ', _x[18], y+_y[2]);
+    print(doc, 10,Number(invoice.edges[1]??='0').toFixed(2), _x[17], y+_y[2]);
+    print(doc, 10,Number(invoice.amounts[1]??='0').toFixed(2), _x[17], y+_y[3]-7);
     
   
-    print(doc, 10,'3 : 82 م ', _x[14], y+_y[2]);
-    print(doc, 10,Number(invoice.edges[2]??='0').toFixed(2), _x[13], y+_y[2]);
-    print(doc, 10,Number(invoice.amounts[2]??='0').toFixed(2), _x[13], y+_y[3]-7);
+    print(doc, 10,'3 : 82 م ', _x[15], y+_y[2]);
+    print(doc, 10,Number(invoice.edges[2]??='0').toFixed(2), _x[14], y+_y[2]);
+    print(doc, 10,Number(invoice.amounts[2]??='0').toFixed(2), _x[14], y+_y[3]-7);
        
-    print(doc, 10,'4 : -- م ', _x[11], y+_y[2]);
-    print(doc, 10,Number(invoice.edges[3]??='0').toFixed(2), _x[10], y+_y[2]);
-    print(doc, 10,Number(invoice.amounts[3]??='0').toFixed(2), _x[10], y+_y[3]-7);
+    print(doc, 10,'4 : -- م ', _x[12], y+_y[2]);
+    print(doc, 10,Number(invoice.edges[3]??='0').toFixed(2), _x[11], y+_y[2]);
+    print(doc, 10,Number(invoice.amounts[3]??='0').toFixed(2), _x[11], y+_y[3]-7);
 
     print(doc, 10,'المجموع', _x[9], y+_y[2]);
-    print(doc, 10, Number(invoice.totalAmounts??='0').toFixed(2), _x[8], y+_y[3]-7);
+    print(doc, 10, Number(invoice.totalAmounts??='0').toFixed(2), _x[9], y+_y[3]-7);
    
-    print(doc, 10,'رسم التطهير', _x[6], y+_y[2]);
-    print(doc, 10, Number(invoice.totalTaxes??='0').toFixed(2), _x[5]+7,y+_y[3]-7);
+    print(doc, 10,'رسم التطهير', _x[7], y+_y[2]);
+    print(doc, 10, Number(invoice.totalTaxes??='0').toFixed(2), _x[7],y+_y[3]-7);
+    print(doc, 10,'الاشتراك', _x[5], y+_y[2]);
+    print(doc, 10, Number(global.inscriptionTax??='0').toFixed(2), _x[5],y+_y[3]-7);
     
     print(doc, 10,'المبلغ اﻹجمالي' , _x[2], y+_y[2]);
-    print(doc, 10,Number(invoice.totalToPay).toFixed(2), _x[1],y+_y[3]-7);
+    print(doc, 10,Number(invoice.totalToPay).toFixed(2), _x[2],y+_y[3]-7);
     
     print(doc, 12,context.datelabel , _x[18], y+_y[3]+m/2);
-    print(doc, 8,context.note, _x[1], y+_y[5]+5);
+    print(doc, 10,context.note, _x[1], y+_y[4]+5);
     
     print(doc, 10,'رئيس المجلس الشعبي البلدي : ', _x[18], y+_y[4]+m/4);
-    print(doc, 12,context.PAPC, _x[14], y+_y[4]+m/2);
+    print(doc, 14,context.PAPC, _x[14], y+_y[4]+m/4);
 
 }
 
