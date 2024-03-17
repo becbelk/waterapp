@@ -35,7 +35,7 @@ const header4 = ['رقم', 'العداد', 'اللقب و الاسم', 'العد
 const header5 = ['', '', '', 'القديم', 'الجديد', '', '', '', '', '', '', '', '', '', 'الجزافي', '', '', '', '', '', 'التطهير', '', 'اﻹجمالي'].reverse();
 exports.buildPDFReport = (doc, list, context) => {
     buildPageHeader(doc, context);
-    //console.log('================================================================');
+    console.log('buildPDFReport   ================================================================');
     printSum(doc, context);
     list.map((consumer, i) => putDataInLineA3(doc, consumer, i, context));
     context.isFirstPage = false;
@@ -173,23 +173,28 @@ const printSum = (doc, context) => {
     if (context.isNotFirstPage == 1) { //is not the first page
         context.topPage += 20;
         context.sum.map((item, i) => {
-            //console.log('item=',item,'_x[',i,'],=',_x[i],'context.isNotFirstPage=',context.isFNotirstPage)
+            //      console.log('item=', item, '_x[', i, '],=', _x[i], 'context.isNotFirstPage=', context.isNotFirstPage)
             printTextAra(doc, 10, Number(item).toFixed(2), _x[i], _x[i + 1] - _x[i], context.topPage, 21)
         }
         );
         printLabel(doc, context);
 
     }
-    else {//is  the first page
+    else {  //is  the first page
         console.log(' etat initial')
+        context.isNotFirstPage = 1;
+        context.isTop = 0;
     }
 }
 const printLabel = (doc, context) => {
- //   context.indexSwitch = (context.indexSwitch + 1) % 2;
-    index = context.isNotFirstPage + (context.indexSwitch++ %2) + context.isLastPage;
+    context.isTop = context.isTop % 2
+    let lastLabelIndex = context.isLastPage ? 2 : 0;
+    index = context.isNotFirstPage + (context.indexSwitch % 2) + lastLabelIndex;
+    console.log('index=', index, ';   lastLabel=', lastLabelIndex, ';   context.isNotFirstPage=', context.isNotFirstPage)
     label = context.sumLabel[index]
     printTextAra(doc, 10, label, _x[17], 100, context.topPage, 21);
-    context.isNotFirstPage = 1;
-    console.log('context.indexSwitch=', context.indexSwitch, 'index=', index, 'label=',label)
-    console.log('context.isLastPage=', context.isLastPage, 'index=', index, 'label=',)
+    context.indexSwitch++;
+    context.isTop++
+    // console.log('context.indexSwitch=', context.indexSwitch, 'index=', index, 'label=', label)
+    //console.log('context.isLastPage=', context.isLastPage, 'index=', index, 'label=',)
 }

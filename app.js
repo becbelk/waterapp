@@ -44,5 +44,6 @@ app.set('view engine', 'ejs');
 
 app.use('/', adminRouter);
 app.use('/', mainRouter);
+app.use('*', (req,res)=>{res.status(404).render('errors/404')});
 
 app.listen(port, console.log(`listening at port:  ${port}`));

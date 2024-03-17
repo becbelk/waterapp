@@ -24,8 +24,6 @@ exports.one = async (req, res) => {
 
 const updateConsumer = async ({ consumer, id, user }) => {
 
-
-
     return await Consumer.updateOne(
         { no: consumer.no, "consumptions.periode": global.context.periode },
         {
@@ -36,7 +34,8 @@ const updateConsumer = async ({ consumer, id, user }) => {
                 saved: true,
                 "consumptions.$.oldConsumption": consumer.oldConsumption,
                 "consumptions.$.newConsumption": consumer.newConsumption,
-                "consumptions.$.isFlatRated": consumer.isFlatRated
+                "consumptions.$.isFlatRated": consumer.isFlatRated,
+                "consumptions.$.isTaxed": consumer.isTaxed,
             },
             $push: {
                 redactions: {

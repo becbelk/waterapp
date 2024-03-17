@@ -30,7 +30,7 @@ const calculateDetailedInvoice = (consumer) => {
             totalAmounts: 0,
             totalToPay: 0,
         };
-console.log('detailedInvoice=',detailedInvoice)
+//console.log('detailedInvoice=',detailedInvoice)
         var current = global.levelAmountTable[0];
         let currentTax = 0, currentAmount = 0;
 
@@ -42,7 +42,7 @@ console.log('detailedInvoice=',detailedInvoice)
                 detailedInvoice.edges.push(leveledConsumption);
                 currentAmount = current.price * leveledConsumption;
                 detailedInvoice.amounts.push(Number(currentAmount).toFixed(2));
-                currentTax = current.tax * leveledConsumption;
+                currentTax =(consumer.isTaxed==true)? current.tax * leveledConsumption:0;//todo: to verify
                 detailedInvoice.taxes.push(Number(currentTax).toFixed(2));
                 detailedInvoice.totalTaxes += currentTax;
                 detailedInvoice.totalAmounts += currentAmount;
@@ -55,13 +55,13 @@ console.log('detailedInvoice=',detailedInvoice)
                 detailedInvoice.edges.push(Number(current.difference).toFixed(2));
                 currentAmount = current.price * current.difference;
                 detailedInvoice.amounts.push(Number(currentAmount).toFixed(2));
-                currentTax = current.tax * current.difference;
+                currentTax =(consumer.isTaxed==true)? current.tax * current.difference:0;
                 detailedInvoice.taxes.push(Number(currentTax).toFixed(2));
                 detailedInvoice.totalTaxes += currentTax;
                 detailedInvoice.totalAmounts += currentAmount;
             }
             previous = current;
-            console.log('detailedInvoice=',detailedInvoice)
+           // console.log('detailedInvoice=',detailedInvoice)
         }
     }
 

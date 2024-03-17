@@ -13,8 +13,9 @@ exports.context = {
     isNotFirstPage: 0,//true==>etat initial: is the first page
     isLastPage:0, //false
     headButtomSwitch: ['inHeader','inButtom'],
-    indexSwitch:1,
-    sumLabel: ['',  'المجموع للترحيل','المجموع المرحل','المجموع الكلي'],
+    indexSwitch:2,
+    isTop:1,
+    sumLabel: ['',  'المجموع للترحيل','المجموع المرحل','المجموع الكلي','المجموع المرحل'],
     endOfDocument: false,
 }
 exports. levelAmountTable = [

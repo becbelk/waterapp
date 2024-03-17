@@ -14,7 +14,11 @@ const splashLayout = '../views/layouts/splash_layout.ejs';
 exports.homepage = async (req, res) => {
     try {
         const token = req.cookies.token;
+        console.log('[*]->[admin router]: home page token ')
+
         if (token) {
+        console.log('[*]->[admin router]: is  token ', token)
+
             const decode = jwt.verify(token, process.env.JWT_SECRET)
             req.userId = decode.userId;
             console.log('[*]->[admin router]:{@/homepage}');
@@ -23,8 +27,9 @@ exports.homepage = async (req, res) => {
         }
         console.log('[*]->[admin router]: {@/admin/signin}');
         const title = 'إدارة الحساب';
-        res.render('read/admin/signin', { title, layout: splashLayout });
+        res.render('admin/read/signin', { title, layout: splashLayout });
     } catch (error) {
+        res.redirect('/home');
         console.log('[*]->[admin router]: ',error)
     }
 
@@ -51,7 +56,6 @@ exports.signin = async (req, res) => {
         }
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET)
         res.cookie('token', token, { httpOnly: true })
-        //todo expiration date
         res.redirect('/home');
 
     } catch (e) {

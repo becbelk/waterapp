@@ -4,7 +4,6 @@ const search = require('../search');
  * GET table
  */
 
-
 exports.show=(req,res)=>{
     //build query
     console.log( 'req.query ==',req.query)
@@ -15,13 +14,6 @@ exports.show=(req,res)=>{
     res.redirect('edited'+string);
 else res.redirect('unedited'+string);
 }
-
-
-
-
-
-
-
 
 exports.edited = async (req, res) => {
 
@@ -45,7 +37,7 @@ exports.edited = async (req, res) => {
 
 };
 exports.unedited = async (req, res) => {
-
+//todo should the client choose between edit one one or many
     try {
         let page = req.query.page || 1;
         console.log('isSaved')
@@ -66,8 +58,6 @@ exports.unedited = async (req, res) => {
     }
 
 };
-
-
 
 exports.reset = async (req, res) => {
     try {
@@ -90,3 +80,21 @@ exports.reset = async (req, res) => {
 
 
 
+exports.showEditableList=async (req,res)=>{
+    try {
+        let page = req.query.page || 1;
+        console.log('isSaved in editable list')
+        console.log('query ==============',req.query);
+        const title = 'تسيير استهلاك المياه';
+        let searchTerm = req.query.searchTerm ;
+        let passedQuery='/edited?'+(searchTerm!=undefined && searchTerm!=null? 'isSaved=not-saved&searchTerm='+searchTerm:'');
+        const datas = await search.find({ searchTerm, page, isSaved: false, sort: 'no+1' });
+
+        datas.title = title;
+        res.render('consumer/update/list',
+           { ...datas, passedQuery}
+        );
+    } catch (e) {
+        console.log(e)
+    }
+}

@@ -46,7 +46,7 @@ exports.elementOf = (list, i,context) => {
     let _difference = _consumption.newConsumption - _consumption.oldConsumption;
 console.log('_difference=',_difference)
     let _detailedInvoice = calculator.calculateDetailedInvoice(_difference);
-console.log('_detailedInvoice=',_detailedInvoice)
+//console.log('_detailedInvoice=',_detailedInvoice)
     _element.cons_level_0 = Number(_detailedInvoice.edges[0] ?? 0);
     _element.cons_level_1 =Number( _detailedInvoice.edges[1] ?? 0);
     _element.cons_level_2 = Number(_detailedInvoice.edges[2] ?? 0);

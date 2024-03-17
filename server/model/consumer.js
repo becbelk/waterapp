@@ -15,6 +15,7 @@ const consumptionSchema = Schema({
     payed: { type: Number, default: 0 ,get:(value)=>{return value.toFixed(2)} },
     canceledBy: { type: String, default: '-' },
     saved:{type:Boolean,default:false},
+    isTaxed:{type:Boolean,default:true},//todo: should has a special function to update dn
     isFlatRated:{type:Boolean, default:false}//جزافي
 },
 );

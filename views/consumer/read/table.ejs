@@ -1,4 +1,6 @@
 <%- include('../../partials/search.ejs') %>
+<a href="/switch-edit-mod">وضع   للتعديل</a>
+
     <div class="m-4 table-responsive">
         <table class="table table-striped table-sm">
             <thead>
@@ -54,13 +56,13 @@
                                 <div class=" col-2 d-flex flex-row justify-content-start gap-2">
                                     <button class="mX-3 btn btn-outline-primary btn-small centered" data-bs-toggle="modal"
                                         data-bs-target="#view-one-modal"
-                                        data-consumer="{'watermeterId':'<%= consumer.watermeterId%>','no':'<%= consumer.no%>','name':'<%= consumer.name%>','address':'<%=consumer.address %>','oldConsumption':'<%= consumer.oldConsumption %>','newConsumption':'<%= consumer.newConsumption %>','isFlatRated':<%=consumer.isFlatRated  %>}">
+                                        data-consumer="{'watermeterId':'<%= consumer.watermeterId%>','no':'<%= consumer.no%>','name':'<%= consumer.name %>','address':'<%= consumer.address %>','oldConsumption':'<%= consumer.oldConsumption %>','newConsumption':'<%= consumer.newConsumption %>','isFlatRated':<%=consumer.isFlatRated  %>,'isTaxed':<%=consumer.isTaxed  %>}">
                                         <img src="/img/view.png" class="small-icon" alt="معاينة"></button>
                                 </div>
                                 <div class="col-2 d-flex flex-row justify-content-start gap-2">
                                     <button class="mx-3 btn btn-outline-warning btn-small centered" data-bs-toggle="modal"
                                         data-bs-target="#delete-one-modal"
-                                        data-consumer="{'watermeterId':'<%= consumer.watermeterId%>','no':'<%= consumer.no%>','name':'<%= consumer.name%>','address':'<%=consumer.address %>','oldConsumption':'<%= consumer.oldConsumption %>','newConsumption':'<%= consumer.newConsumption %>','isFlatRated':<%=consumer.isFlatRated  %>}">
+                                        data-consumer="{'watermeterId':'<%= consumer.watermeterId%>','no':'<%= consumer.no%>','name':'<%= consumer.name %>','address':'<%= consumer.address %>','oldConsumption':'<%= consumer.oldConsumption %>','newConsumption':'<%= consumer.newConsumption %>','isFlatRated':<%=consumer.isFlatRated  %>,'isTaxed':<%=consumer.isTaxed  %>}">
                                         <img src="/img/delete-1.png" class="small-icon"></button>
                                 </div>
                             </div>
@@ -88,15 +90,18 @@
                 <div class="modal-body">
                     <form>
                         <div class="row">
-                            <label for="recipient-name" class="col-2">العداد:</label>
-                            <input type="text" class="col-5" name="watermeterId">
+                            <label for="watermeterId" class="col-2">العداد:</label>
+                            <input type="text" class="col-3" name="watermeterId">
 
-                            <label for="recipient-name" class="col-2">جزافي</label>
-                            <input type="checkbox" class="col-2" name="isFlatRated">
+                            <label for="isFlatRated" class="col-2">جزافي</label>
+                            <input type="checkbox" class="col-1" name="isFlatRated">
+
+                            <label for="isTaxed" class="col-2">معني بالتطهير</label>
+                            <input type="checkbox" class="col-1" name="isTaxed">
                             <div class="col-6">
-                                <label for="recipient-name" class="col-form-label">الاسم:</label>
+                                <label for="name" class="col-form-label">الاسم:</label>
                                 <input type="text" class="form-control" name="name">
-                                <label for="recipient-name" class="col-form-label">القديم:</label>
+                                <label for="oldConsumption" class="col-form-label">القديم:</label>
                                 <input type="text" class="form-control" name="oldConsumption"
                                     value="<%= consumers.name %>">
                             </div>

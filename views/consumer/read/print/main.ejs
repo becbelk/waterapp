@@ -1,4 +1,19 @@
 <div class="row">
-    <a  href="/print-invoices" class="col-3 btn btn-outline-primary rounded-sm"> طبياعة الفواتير</a>
-    <a href="/print-list" class="col-3 btn btn-outline-primary rounded-sm"> طبياعة القائمة</a>
+    <a href="#" class="col-1"></a>
+    <a href="/print-invoices" class="col-2 btn btn-outline-primary rounded-sm"> طبياعة الفواتير</a>
+    <a href="#" class="col-1"></a>
+    <a href="/print-list" class="col-2 btn btn-outline-primary rounded-sm"> طبياعة القائمة اﻹجمالية</a>
+    <a href="#" class="col-1"></a>
+    <a class="col-2 btn btn-outline-primary" data-bs-toggle="collapse" href="#collapseCartiers" role="button" aria-expanded="false"
+        aria-controls="collapseExample">
+       اﻷحياء
+    </a>
+
+    <div class="collapse" id="collapseCartiers">
+        <div class="card card-body">
+         <% sites.forEach(site => { %>
+          <a href="/print-collect/<%= site._id.address %>"><%= site._id.address %></a>
+         <% }) %>
+        </div>
+      </div>
 </div>

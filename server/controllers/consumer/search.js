@@ -24,41 +24,53 @@ const perPage = 10;
 
 */
 
-
+exports.allSites = async () => {
+    let sites = await Consumer.aggregate([{
+        $group: {
+            _id: {
+                address: "$address",
+            }
+        }},]);
+        console.log('sites:',sites)
+    return sites;
+}
 
 exports.find = async ({ searchTerm, page, isSaved, sort }) => {
-   
+
     let stages = {};
     let initialStages = toStages(searchTerm)
     updatedStages = ("$match" in initialStages) ?
-        { ...initialStages, $match: { ...initialStages["$match"], saved: isSaved,deleted:false, "consumptions.periode": global.context.periode } }
-        : { ...initialStages, $match: { saved: isSaved,deleted:false, "consumptions.periode": global.context.periode } }
+        { ...initialStages, $match: { ...initialStages["$match"], saved: isSaved, deleted: false, "consumptions.periode": global.context.periode } }
+        : { ...initialStages, $match: { saved: isSaved, deleted: false, "consumptions.periode": global.context.periode } }
     console.log('initialStages updated =', updatedStages);
     stages = buildStages({ query: updatedStages, sortingWith: sort, paginationTo: page })
 
     let countQuery = buildCountQuery(initialStages, isSaved);
     console.log('forCountQuery=', countQuery);
-   let count = await Consumer.countDocuments(countQuery);
+    let count = await Consumer.countDocuments(countQuery);
 
     let consumers = await Consumer.aggregate(stages);
+    console.log(consumers);
     let pages = Math.ceil(count / perPage);
     const nextPage = parseInt(page) + 1;
     const previousPage = parseInt(page) - 1;
     const hasNextPage = nextPage <= Math.ceil(count / perPage);
     const hasPreviousPage = previousPage >= 1;
-    return { consumers, count, pages, hasNextPage,currentPage:page,
-         nextPage, hasPreviousPage, previousPage, areSaved:isSaved }
+    return {
+        consumers, count, pages, hasNextPage, currentPage: page,
+        nextPage, hasPreviousPage, previousPage, areSaved: isSaved
+    }
 
 }
 
 
 const buildStages = ({ query, sortingWith, paginationTo }) => {
-    let matchStage = { $match: query["$match"] ,};
+    let matchStage = { $match: query["$match"], };
 
     let page = paginationTo;
     let sort = sortingWith;
     let textStage = ('$text' in query && query["$text"]["$search"]) ?
-        [{ $match: { $text: query["$text"] } ,}]
+        [{ $match: { $text: query["$text"] }, }]
         : [];
 
     let unwindStages = [
@@ -75,8 +87,9 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
             oldConsumption: "$consumptions.oldConsumption",
             newConsumption: "$consumptions.newConsumption",
             isFlatRated: "$consumptions.isFlatRated",
+            isTaxed: "$consumptions.isTaxed",
             editedAt: "$redactions.time",//******** 
-            saved:1
+            saved: 1
         }
     },
     {
@@ -86,11 +99,12 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
                 no: "$no",
                 name: "$name",
                 address: "$address",
-                saved:"$saved",
+                saved: "$saved",
                 watermeterId: "$watermeterId",
                 oldConsumption: "$oldConsumption",
                 newConsumption: "$newConsumption",
-                isFlatRated: "$isFlatRated"
+                isFlatRated: "$isFlatRated",
+                isTaxed: "$isTaxed",
             },
             editedAt: { $max: "$editedAt" }
         }
@@ -105,8 +119,9 @@ const buildStages = ({ query, sortingWith, paginationTo }) => {
             oldConsumption: "$_id.oldConsumption",
             newConsumption: "$_id.newConsumption",
             isFlatRated: "$_id.isFlatRated",
+            isTaxed: "$_id.isTaxed",
             editedAt: "$editedAt",
-            saved:"_id.saved",
+            saved: "_id.saved",
         }
     },
 
@@ -137,6 +152,7 @@ const cancelStages = () => {
             oldConsumption: "$consumptions.oldConsumption",
             newConsumption: "$consumptions.newConsumption",
             isFlatRated: "$consumptions.isFlatRated",
+            isTaxed: "$consumptions.isTaxed",
             editedAt: "$redactions.time"//******** 
         }
     },
@@ -150,7 +166,8 @@ const cancelStages = () => {
                 watermeterId: "$watermeterId",
                 oldConsumption: "$oldConsumption",
                 newConsumption: "$newConsumption",
-                isFlatRated: "$isFlatRated"
+                isFlatRated: "$isFlatRated",
+                isTaxed: "$isTaxed"
             },
             editedAt: { $max: "$editedAt" }
         }
@@ -165,6 +182,7 @@ const cancelStages = () => {
             oldConsumption: "$_id.oldConsumption",
             newConsumption: "$_id.newConsumption",
             isFlatRated: "$_id.isFlatRated",
+            isTaxed: "$_id.isTaxed",
             editedAt: "$editedAt"//******** 
 
         }
@@ -183,7 +201,7 @@ const cancelStages = () => {
 
 const toStages = (maybeStr) => {
     if (/^[\d]+$/.test(maybeStr)) {
-        return { $match: { no: formatNo(maybeStr) ,} };
+        return { $match: { no: formatNo(maybeStr), } };
     }
     else {
         return queryBetweenTwoNumbers(maybeStr)
@@ -196,7 +214,7 @@ const queryBetweenTwoNumbers = (maybeStr) => {
 
     if (/^[\d]+[\s]*(-)[\s]*[\d]+$/.test(maybeStr)) {
         let interval = maybeStr.split('-');
-        return { $match: { no: inBetween({ interval: interval }) ,} };
+        return { $match: { no: inBetween({ interval: interval }), } };
     } else {
         return queryText(maybeStr);
     }
@@ -205,11 +223,11 @@ const queryBetweenTwoNumbers = (maybeStr) => {
 const queryText = (maybeStr) => {
 
     if (/^[\u0621-\u064A\/]+$/.test(maybeStr)) {
-        return { $text: { $search: maybeStr },  }//todo
+        return { $text: { $search: maybeStr }, }//todo
     }
     else {
         console.log('not text or empty');
-        return { };
+        return {};
     }
 }
 
@@ -234,6 +252,6 @@ const buildCountQuery = (stages, isSaved) => {
         console.log('match exist')
         if ("$match" in stages)
             return { ...stages["$match"], saved: isSaved, }
-        else return {saved:isSaved,}
+        else return { saved: isSaved, }
     }
 }

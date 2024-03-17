@@ -1,4 +1,4 @@
-const calculator = require('../../../../misc/calculator');
+/*const calculator = require('../../../../misc/calculator');
 const headerBuilder = require('./headless_settings');
 const op = require('./rows_operations');
 const stringOp = require('../../../../misc/string_op');
@@ -49,7 +49,6 @@ exports.buildReportPage = (list, index, headerSum, footerSum, isLastPage, contex
 
 
 
-
 exports.getHeaderContent = () => {
     const _struct = {
         headers: headerBuilder.waterAppTableHeader(),
@@ -73,3 +72,4 @@ exports.buildReportHeader = () => {
     };
     return _struct;
 }
+*/
