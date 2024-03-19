@@ -1,8 +1,8 @@
 const op = require('./rows_operations');
 const stringOp = require('../../../../misc/string_op');
 const calculator = require('../../../../misc/calculator');
-const rop = require('./rows_operations')
-
+//const rop = require('./rows_operations')
+/*
 const _dx0 = 50;
 const _dx1 = 30;
 const _dx2 = 15;
@@ -11,8 +11,9 @@ const _dy0 = 20;
 const _dy1 = 15;
 const _dy2 = 10;
 const _dy3 = 5;
-
-const _x = [20, 80, 120, 170, 220, 250,
+*/
+const _x = [
+    20,   80, 120, 170, 220, 250,
     300, 350, 400, 450, 500,
     550, 600, 650, 700, 750,
     800, 850, 890, 930,
@@ -35,7 +36,6 @@ const header4 = ['رقم', 'العداد', 'اللقب و الاسم', 'العد
 const header5 = ['', '', '', 'القديم', 'الجديد', '', '', '', '', '', '', '', '', '', 'الجزافي', '', '', '', '', '', 'التطهير', '', 'اﻹجمالي'].reverse();
 exports.buildPDFReport = (doc, list, context) => {
     buildPageHeader(doc, context);
-    console.log('buildPDFReport   ================================================================');
     printSum(doc, context);
     list.map((consumer, i) => putDataInLineA3(doc, consumer, i, context));
     context.isFirstPage = false;
