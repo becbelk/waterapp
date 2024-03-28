@@ -81,7 +81,7 @@ exports.printCollect= async(req,res)=>{
         },
         { $sort: { address: 1, no: 1 } }
     ]);
-    console.log('[printList] :',list);
+    //console.log('[printList] :',list);
     pdf.printListInPDF(list, global.context, res);
 }
 const reinitializeContext=()=>{

@@ -4,17 +4,18 @@ const invoiceBuilder = require('./a4_invoice_builder');
 const headerBuilder = require('./headless_settings');
 const options = require('./waterapp_table_options');
 const op = require('./rows_operations')
-const stringOp = require('../../../../misc/string_op');
-const init= require('./header_footer_initializer')
+//const stringOp = require('../../../../misc/string_op');
+// const init= require('./header_footer_initializer')
 const fontName = 'Amiri';
 
-const footerSum = init.zeroRow;
-const headerSum = init.zeroRow
+// const footerSum = init.zeroRow;
+// const headerSum = init.zeroRow
 
 exports.a3Report =async (doc, datas, context) => {
     console.log('->[*] {paginateReport} ');
     const {rowsInPage,rowsInFirstPage}=a3Configuration(doc)
- 
+    context.sum= [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];//todo INitialize to Zero
+
     const pagesCount =1+ Math.ceil((datas.length - rowsInFirstPage) / rowsInPage); 
 
 
